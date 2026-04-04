@@ -3,58 +3,45 @@ using UnityEngine;
 public class PlayerLocalController : MonoBehaviour
 {
     private Transform turret;
-    private PlayerTag tag;
 
-    private float rotationSpeed = 10f;
-    private float turretRotationSpeed = 15f;
-
-    private PlayerNetworkSender networkSender = new PlayerNetworkSender();
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float turretRotationSpeed = 15f;
 
     void Start()
     {
-        tag = GetComponent<PlayerTag>();
         turret = transform.Find("Turret");
     }
 
-    public void Tick(PlayerData player)
+    void Update()
     {
-        if (player.Status != PlayerStatus.Alive)
-            return;
-
-        HandleMovement(player);
-        HandleTurret(player);
+        HandleMovement();
+        HandleTurret();
     }
 
-    private void HandleMovement(PlayerData player)
+    private void HandleMovement()
     {
         Vector2 input = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
+            Input.GetAxis("Horizontal"),
+            Input.GetAxis("Vertical")
         );
 
-        if (input.sqrMagnitude > 0.01f)
+        Vector3 move = new Vector3(input.x, input.y, 0f);
+        transform.position += move * moveSpeed * Time.deltaTime;
+
+        if (move.sqrMagnitude > 0.01f)
         {
-            int dir = GetDirectionIndex(input);
-            player.TankDirection = dir;
+            float angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 
-            networkSender.SendTankDirection(tag.PlayerId, dir);
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                Quaternion.Euler(0, 0, angle),
+                rotationSpeed * Time.deltaTime
+            );
         }
-
-        SmoothTankRotation(player);
     }
 
-    private void SmoothTankRotation(PlayerData player)
-    {
-        float angle = player.TankDirection * 45f;
-
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.Euler(0, 0, angle),
-            rotationSpeed * Time.deltaTime
-        );
-    }
-
-    private void HandleTurret(PlayerData player)
+    private void HandleTurret()
     {
         if (turret == null) return;
 
@@ -76,18 +63,5 @@ public class PlayerLocalController : MonoBehaviour
             Quaternion.Euler(0, 0, angle),
             turretRotationSpeed * Time.deltaTime
         );
-
-        player.TurretRotation = angle;
-
-        networkSender.SendTurretRotation(tag.PlayerId, angle);
-    }
-
-    private int GetDirectionIndex(Vector2 input)
-    {
-        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-
-        if (angle < 0) angle += 360f;
-
-        return Mathf.RoundToInt(angle / 45f) % 8;
     }
 }

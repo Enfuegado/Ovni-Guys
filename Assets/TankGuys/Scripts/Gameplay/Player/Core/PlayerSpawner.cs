@@ -11,13 +11,19 @@ public class PlayerSpawner
         this.prefabs = prefabs;
     }
 
-    public GameObject Spawn(int id, GameState state)
+    public GameObject Spawn(int id)
     {
         Vector2 spawnPos = spawnManager != null
             ? spawnManager.GetSpawnPosition(id)
             : Vector2.zero;
 
         GameObject prefab = GetPrefab(id);
+
+        if (prefab == null)
+        {
+            Debug.LogError("No prefab assigned for player");
+            return null;
+        }
 
         GameObject obj = Object.Instantiate(prefab, spawnPos, Quaternion.identity);
         obj.name = $"Player_{id}";
@@ -28,11 +34,6 @@ public class PlayerSpawner
             tag.PlayerId = id;
         }
 
-        if (state.Players.TryGetValue(id, out var playerData))
-        {
-            playerData.Position = spawnPos;
-        }
-
         return obj;
     }
 
@@ -41,7 +42,7 @@ public class PlayerSpawner
         if (prefabs == null || prefabs.Length == 0)
             return null;
 
-        int index = (id - 1) % prefabs.Length;
+        int index = id % prefabs.Length;
 
         return prefabs[index];
     }

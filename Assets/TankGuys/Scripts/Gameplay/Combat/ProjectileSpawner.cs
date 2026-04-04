@@ -7,6 +7,7 @@ public class ProjectileSpawner : MonoBehaviour
     public void Spawn(int playerId, Transform shootPoint, Vector2 direction)
     {
         if (shootPoint == null) return;
+        if (projectilePrefab == null) return;
 
         GameObject proj = Instantiate(
             projectilePrefab,
@@ -15,6 +16,9 @@ public class ProjectileSpawner : MonoBehaviour
         );
 
         var projectile = proj.GetComponent<Projectile>();
-        projectile.Initialize(playerId, direction.normalized);
+        if (projectile != null)
+        {
+            projectile.Initialize(playerId, direction.normalized);
+        }
     }
 }

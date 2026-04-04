@@ -23,7 +23,6 @@ public class GameEndUIController : MonoBehaviour
 
     public void OnExitButton()
     {
-        NetworkBootstrap.Instance.ResetNetwork();
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

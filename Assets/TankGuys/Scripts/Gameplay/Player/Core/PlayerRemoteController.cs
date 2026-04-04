@@ -4,24 +4,22 @@ public class PlayerRemoteController : MonoBehaviour
 {
     private Transform turret;
 
-    private float rotationSpeed = 10f;
-    private float turretRotationSpeed = 15f;
+    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float turretRotationSpeed = 15f;
 
     void Start()
     {
         turret = transform.Find("Turret");
     }
 
-    public void Tick(PlayerData player)
+    public void UpdateRotation(float tankAngle, float turretAngle)
     {
-        SmoothTankRotation(player);
-        SmoothTurretRotation(player);
+        SmoothTankRotation(tankAngle);
+        SmoothTurretRotation(turretAngle);
     }
 
-    private void SmoothTankRotation(PlayerData player)
+    private void SmoothTankRotation(float angle)
     {
-        float angle = player.TankDirection * 45f;
-
         transform.rotation = Quaternion.Lerp(
             transform.rotation,
             Quaternion.Euler(0, 0, angle),
@@ -29,11 +27,11 @@ public class PlayerRemoteController : MonoBehaviour
         );
     }
 
-    private void SmoothTurretRotation(PlayerData player)
+    private void SmoothTurretRotation(float angle)
     {
         if (turret == null) return;
 
-        Quaternion target = Quaternion.Euler(0, 0, player.TurretRotation);
+        Quaternion target = Quaternion.Euler(0, 0, angle);
 
         turret.rotation = Quaternion.Lerp(
             turret.rotation,

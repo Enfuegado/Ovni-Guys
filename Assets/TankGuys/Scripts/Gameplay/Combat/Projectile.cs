@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (hasHit) return; 
+        if (hasHit) return;
 
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
 
@@ -42,13 +42,7 @@ public class Projectile : MonoBehaviour
 
         hasHit = true;
 
-        if (NetworkBootstrap.Instance.IsHost)
-        {
-            NetworkBootstrap.Instance.Send(new DamageMessage
-            {
-                targetId = player.PlayerId
-            });
-        }
+        Debug.Log($"Player {player.PlayerId} hit by {ownerId}");
 
         gameObject.SetActive(false);
         Destroy(gameObject);
