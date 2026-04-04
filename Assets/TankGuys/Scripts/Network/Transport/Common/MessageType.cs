@@ -1,0 +1,23 @@
+public enum MessageType
+{
+    Hello,
+    AssignId,
+    PlayerList,
+    StartGame,
+    Move,
+    Shoot,
+    Damage,
+    PlayerState,
+    TurretRotation,
+    TankDirection,
+    Pause,
+    GameEnd,
+    Kick,
+    Ban,
+    ConnectionRejected,
+    Ping,
+    Pong,
+    PingReport,
+    Kicked,
+    Banned
+}
