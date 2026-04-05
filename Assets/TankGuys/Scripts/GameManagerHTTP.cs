@@ -1,17 +1,18 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManagerHTTP : MonoBehaviour
 {
     [Header("Config")]
     public string gameId = "game1";
-    public int playerId = 0; // 0 o 1
+    public int playerId = 0;
     private int otherId;
 
     [Header("References")]
     public ApiClient apiClient;
     public SpawnManager spawnManager;
     public GameObject playerPrefab;
-    public TMPro.TextMeshProUGUI statusText;
+    public TextMeshProUGUI statusText;
 
     private GameObject localPlayer;
     private GameObject remotePlayer;
@@ -19,6 +20,9 @@ public class GameManagerHTTP : MonoBehaviour
     private PlayerMovementInterpolator interpolator = new PlayerMovementInterpolator();
 
     private bool otherPlayerFound = false;
+    private bool gameEnded = false;
+
+    public Vector3 winPosition = new Vector3(9999, 9999, 0);
 
     void Start()
     {
@@ -93,20 +97,41 @@ public class GameManagerHTTP : MonoBehaviour
             SpawnRemotePlayer(targetPos);
             otherPlayerFound = true;
 
-            SetStatus("Jugador encontrado!");
+            SetStatus("Jugador conectado");
             return;
         }
 
-        Vector3 current = remotePlayer.transform.position;
+        if (remotePlayer == null) return;
 
+        Vector3 current = remotePlayer.transform.position;
         Vector3 newPos = interpolator.GetPosition(otherId, current, targetPos);
 
         remotePlayer.transform.position = newPos;
+
+        CheckRemoteWin(targetPos);
+    }
+
+    void CheckRemoteWin(Vector3 pos)
+    {
+        if (gameEnded) return;
+
+        float dist = Vector2.Distance(pos, winPosition);
+
+        if (dist < 1f)
+        {
+            gameEnded = true;
+            SetStatus("Perdiste");
+        }
     }
 
     void SetStatus(string msg)
     {
         if (statusText != null)
             statusText.text = msg;
+    }
+
+    public GameObject GetLocalPlayer()
+    {
+        return localPlayer;
     }
 }
