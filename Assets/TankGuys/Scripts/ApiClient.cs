@@ -16,9 +16,9 @@ public class ApiClient : MonoBehaviour
         {
             yield return webRequest.SendWebRequest();
 
-            // ⚠️ IMPORTANTE: ignoramos errores (ej: 404)
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
+                onSuccess?.Invoke(null);
                 yield break;
             }
 

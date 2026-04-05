@@ -10,7 +10,6 @@ public class OrbCollector : MonoBehaviour
 
     private GameManagerHTTP gameManager;
     private GameObject localPlayer;
-    private GameObject remotePlayer;
 
     private bool hasWon = false;
 
@@ -26,29 +25,10 @@ public class OrbCollector : MonoBehaviour
         if (localPlayer == null)
             localPlayer = gameManager.GetLocalPlayer();
 
-        if (remotePlayer == null)
-            FindRemotePlayer();
-
         if (localPlayer == null) return;
 
         if (!hasWon)
             CheckLocalCollection();
-
-        SimulateRemoteCollection();
-    }
-
-    void FindRemotePlayer()
-    {
-        PlayerTag[] players = FindObjectsOfType<PlayerTag>();
-
-        foreach (var p in players)
-        {
-            if (p.PlayerId != gameManager.playerId)
-            {
-                remotePlayer = p.gameObject;
-                break;
-            }
-        }
     }
 
     void CheckLocalCollection()
@@ -62,24 +42,6 @@ public class OrbCollector : MonoBehaviour
             if (dist < collectRadius)
             {
                 CollectOrb(orb);
-                break;
-            }
-        }
-    }
-
-    void SimulateRemoteCollection()
-    {
-        if (remotePlayer == null) return;
-
-        GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
-
-        foreach (GameObject orb in orbs)
-        {
-            float dist = Vector2.Distance(remotePlayer.transform.position, orb.transform.position);
-
-            if (dist < collectRadius)
-            {
-                Destroy(orb);
                 break;
             }
         }
