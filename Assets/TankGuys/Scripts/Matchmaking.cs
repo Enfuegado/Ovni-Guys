@@ -124,6 +124,16 @@ public class Matchmaking : MonoBehaviour
         }
     }
 
+    public void Cleanup()
+    {
+        if (lockStream != null)
+        {
+            lockStream.Close();
+            lockStream.Dispose();
+            lockStream = null;
+        }
+    }
+
     public int GetPlayerId()
     {
         return playerId;
