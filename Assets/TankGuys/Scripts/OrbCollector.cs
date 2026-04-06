@@ -13,9 +13,12 @@ public class OrbCollector : MonoBehaviour
 
     private bool hasWon = false;
 
+    private ScoreUI scoreUI;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManagerHTTP>();
+        scoreUI = FindObjectOfType<ScoreUI>();
     }
 
     void Update()
@@ -52,10 +55,22 @@ public class OrbCollector : MonoBehaviour
         Destroy(orb);
         score++;
 
+        UpdateScoreUI();
+
         if (score >= winScore)
         {
             WinGame();
         }
+    }
+
+    void UpdateScoreUI()
+    {
+        if (scoreUI == null) return;
+
+        if (gameManager.GetPlayerId() == 0)
+            scoreUI.SetBlueScore(score);
+        else
+            scoreUI.SetRedScore(score);
     }
 
     void WinGame()
@@ -64,6 +79,8 @@ public class OrbCollector : MonoBehaviour
 
         localPlayer.transform.position = winPosition;
 
-        Debug.Log("Ganaste");
+        var endUI = FindObjectOfType<GameEndUIController>();
+        if (endUI != null)
+            endUI.ShowResult(true, gameManager.GetPlayerId());
     }
 }

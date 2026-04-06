@@ -8,7 +8,7 @@ public class GameManagerHTTP : MonoBehaviour
 
     public ApiClient apiClient;
     public SpawnManager spawnManager;
-    public GameObject playerPrefab;
+    public GameObject[] playerPrefabs;
     public TextMeshProUGUI statusText;
 
     public Vector3 winPosition = new Vector3(9999, 9999, 0);
@@ -37,7 +37,7 @@ public class GameManagerHTTP : MonoBehaviour
 
         InvokeRepeating(nameof(SyncLoop), 0f, 0.02f);
 
-        SetStatus("Player " + playerId);
+        SetStatus();
     }
 
     void LoadPlayerId()
@@ -74,11 +74,29 @@ public class GameManagerHTTP : MonoBehaviour
         Debug.Log("PlayerID asignado: " + playerId);
     }
 
+    void SetStatus()
+    {
+        if (statusText == null) return;
+
+        if (playerId == 0)
+        {
+            statusText.text = "BLUE";
+            statusText.color = Color.blue;
+        }
+        else
+        {
+            statusText.text = "RED";
+            statusText.color = Color.red;
+        }
+    }
+
     void SpawnLocalPlayer()
     {
         Vector2 pos = spawnManager.GetSpawnPosition(playerId);
 
-        localPlayer = Instantiate(playerPrefab, pos, Quaternion.identity);
+        GameObject prefab = playerPrefabs[playerId];
+
+        localPlayer = Instantiate(prefab, pos, Quaternion.identity);
         localPlayer.name = "LOCAL";
 
         localPlayer.AddComponent<PlayerLocalController>();
@@ -90,7 +108,9 @@ public class GameManagerHTTP : MonoBehaviour
 
     void SpawnRemotePlayer(Vector3 pos)
     {
-        remotePlayer = Instantiate(playerPrefab, pos, Quaternion.identity);
+        GameObject prefab = playerPrefabs[otherId];
+
+        remotePlayer = Instantiate(prefab, pos, Quaternion.identity);
         remotePlayer.name = "REMOTE";
 
         remotePlayer.AddComponent<PlayerRemoteController>();
@@ -196,15 +216,14 @@ public class GameManagerHTTP : MonoBehaviour
         if (dist < 1f)
         {
             gameEnded = true;
-            SetStatus("Perdiste");
+
+            var endUI = FindObjectOfType<GameEndUIController>();
+            if (endUI != null)
+                endUI.ShowResult(false, otherId);
         }
     }
 
-    void SetStatus(string msg)
-    {
-        if (statusText != null)
-            statusText.text = msg;
-    }
+    void SetStatus(string msg) { }
 
     public GameObject GetLocalPlayer()
     {
