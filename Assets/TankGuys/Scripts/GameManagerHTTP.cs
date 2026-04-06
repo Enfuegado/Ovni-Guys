@@ -1,11 +1,8 @@
 using UnityEngine;
 using TMPro;
-using System.IO;
 
 public class GameManagerHTTP : MonoBehaviour
 {
-    public string gameId = "game1";
-
     public ApiClient apiClient;
     public SpawnManager spawnManager;
     public GameObject[] playerPrefabs;
@@ -15,6 +12,7 @@ public class GameManagerHTTP : MonoBehaviour
 
     private int playerId;
     private int otherId;
+    private string gameId;
 
     private GameObject localPlayer;
     private GameObject remotePlayer;
@@ -29,7 +27,7 @@ public class GameManagerHTTP : MonoBehaviour
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
 
-        LoadPlayerId();
+        LoadFromMatchmaking();
 
         otherId = (playerId == 0) ? 1 : 0;
 
@@ -40,38 +38,22 @@ public class GameManagerHTTP : MonoBehaviour
         SetStatus();
     }
 
-    void LoadPlayerId()
+    void LoadFromMatchmaking()
     {
-        string lock0 = Path.Combine(Application.persistentDataPath, "lock0");
-        string lock1 = Path.Combine(Application.persistentDataPath, "lock1");
+        Matchmaking mm = FindObjectOfType<Matchmaking>();
 
-        try
+        if (mm == null)
         {
-            FileStream fs0 = new FileStream(lock0, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            Debug.LogError("No se encontró Matchmaking");
             playerId = 0;
-
-            GameObject obj = new GameObject("Lock0");
-            DontDestroyOnLoad(obj);
-            obj.AddComponent<FileLock>().Init(fs0);
-        }
-        catch
-        {
-            try
-            {
-                FileStream fs1 = new FileStream(lock1, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-                playerId = 1;
-
-                GameObject obj = new GameObject("Lock1");
-                DontDestroyOnLoad(obj);
-                obj.AddComponent<FileLock>().Init(fs1);
-            }
-            catch
-            {
-                playerId = Random.Range(0, 2);
-            }
+            gameId = "game1";
+            return;
         }
 
-        Debug.Log("PlayerID asignado: " + playerId);
+        playerId = mm.GetPlayerId();
+        gameId = mm.GetGameId();
+
+        Debug.Log("PlayerID cargado: " + playerId);
     }
 
     void SetStatus()
@@ -180,9 +162,7 @@ public class GameManagerHTTP : MonoBehaviour
 
         foreach (GameObject orb in orbs)
         {
-            Vector3 orbPos = orb.transform.position;
-
-            float dist = DistancePointToSegment(orbPos, from, to);
+            float dist = Vector3.Distance(orb.transform.position, from);
 
             if (dist < 0.6f)
             {
@@ -190,21 +170,6 @@ public class GameManagerHTTP : MonoBehaviour
                 break;
             }
         }
-    }
-
-    float DistancePointToSegment(Vector3 point, Vector3 a, Vector3 b)
-    {
-        Vector3 ab = b - a;
-
-        float denom = Vector3.Dot(ab, ab);
-        if (denom == 0f) return Vector3.Distance(point, a);
-
-        float t = Vector3.Dot(point - a, ab) / denom;
-        t = Mathf.Clamp01(t);
-
-        Vector3 closest = a + t * ab;
-
-        return Vector3.Distance(point, closest);
     }
 
     void CheckRemoteWin(Vector3 pos)
@@ -222,8 +187,6 @@ public class GameManagerHTTP : MonoBehaviour
                 endUI.ShowResult(false, otherId);
         }
     }
-
-    void SetStatus(string msg) { }
 
     public GameObject GetLocalPlayer()
     {

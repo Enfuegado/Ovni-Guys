@@ -40,11 +40,6 @@ public class ApiClient : MonoBehaviour
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
             yield return webRequest.SendWebRequest();
-
-            if (webRequest.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"POST Error: {webRequest.error}");
-            }
         }
     }
 }
