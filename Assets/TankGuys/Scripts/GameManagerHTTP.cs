@@ -78,7 +78,8 @@ public class GameManagerHTTP : MonoBehaviour
         localPlayer = Instantiate(prefab, pos, Quaternion.identity);
         localPlayer.name = "LOCAL";
 
-        localPlayer.AddComponent<PlayerLocalController>();
+        var controller = localPlayer.AddComponent<PlayerLocalController>();
+        controller.enabled = false;
 
         var tag = localPlayer.GetComponent<PlayerTag>();
         if (tag != null)
