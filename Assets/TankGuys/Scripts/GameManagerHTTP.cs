@@ -44,7 +44,6 @@ public class GameManagerHTTP : MonoBehaviour
 
         if (mm == null)
         {
-            Debug.LogError("No se encontró Matchmaking");
             playerId = 0;
             gameId = "game1";
             return;
@@ -52,8 +51,6 @@ public class GameManagerHTTP : MonoBehaviour
 
         playerId = mm.GetPlayerId();
         gameId = mm.GetGameId();
-
-        Debug.Log("PlayerID cargado: " + playerId);
     }
 
     void SetStatus()
@@ -178,7 +175,7 @@ public class GameManagerHTTP : MonoBehaviour
 
         float dist = Vector2.Distance(pos, winPosition);
 
-        if (dist < 1f)
+        if (dist < 2f)
         {
             gameEnded = true;
 
@@ -196,5 +193,10 @@ public class GameManagerHTTP : MonoBehaviour
     public int GetPlayerId()
     {
         return playerId;
+    }
+
+    public string GetGameId()
+    {
+        return gameId;
     }
 }

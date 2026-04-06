@@ -17,6 +17,10 @@ public class Matchmaking : MonoBehaviour
     private FileStream lockStream;
     private bool searching = false;
 
+    private bool isReady = false;
+    private bool hasDelay = false;
+    private float startDelay = 0f;
+
     void Awake()
     {
         if (apiClient == null)
@@ -56,48 +60,64 @@ public class Matchmaking : MonoBehaviour
         }
 
         otherId = (playerId == 0) ? 1 : 0;
-
-        Debug.Log("Player asignado: " + playerId);
     }
 
     IEnumerator SearchLoop()
     {
-        float ignoreTime = 2f;
-        bool detected = false;
-
         while (true)
         {
-            ServerData dummy = new ServerData
+            if (!isReady)
             {
-                posX = playerId,
-                posY = 999,
-                posZ = 0
-            };
+                ServerData readyData = new ServerData
+                {
+                    posX = playerId,
+                    posY = 1000,
+                    posZ = 0f
+                };
 
-            yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), dummy));
+                yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), readyData));
+                isReady = true;
+            }
 
-            ignoreTime -= 0.5f;
+            ServerData other = null;
 
             yield return StartCoroutine(apiClient.GetPlayerData(gameId, otherId.ToString(), (data) =>
             {
-                if (data != null && ignoreTime <= 0f)
-                {
-                    if (data.posY == 999)
-                        detected = true;
-                }
+                other = data;
             }));
 
-            if (detected)
+            if (other != null && other.posY == 1000)
             {
-                Debug.Log("Jugador detectado → esperando sincronización");
+                if (playerId == 0 && !hasDelay)
+                {
+                    startDelay = 3f;
+                    hasDelay = true;
 
-                if (statusText != null)
-                    statusText.text = "Match found!";
+                    ServerData startData = new ServerData
+                    {
+                        posX = playerId,
+                        posY = 1000,
+                        posZ = startDelay
+                    };
 
-                yield return new WaitForSeconds(2f);
+                    yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), startData));
+                }
 
-                SceneManager.LoadScene("Game");
-                yield break;
+                if (other.posZ > 0f && !hasDelay)
+                {
+                    startDelay = other.posZ;
+                    hasDelay = true;
+                }
+
+                if (hasDelay)
+                {
+                    if (statusText != null)
+                        statusText.text = "Match found!";
+
+                    yield return new WaitForSeconds(startDelay);
+                    SceneManager.LoadScene("Game");
+                    yield break;
+                }
             }
 
             yield return new WaitForSeconds(0.5f);

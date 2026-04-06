@@ -79,6 +79,19 @@ public class OrbCollector : MonoBehaviour
 
         localPlayer.transform.position = winPosition;
 
+        ServerData winData = new ServerData
+        {
+            posX = winPosition.x,
+            posY = winPosition.y,
+            posZ = winPosition.z
+        };
+
+        StartCoroutine(gameManager.apiClient.PostPlayerData(
+            gameManager.GetGameId(),
+            gameManager.GetPlayerId().ToString(),
+            winData
+        ));
+
         var endUI = FindObjectOfType<GameEndUIController>();
         if (endUI != null)
             endUI.ShowResult(true, gameManager.GetPlayerId());
