@@ -31,6 +31,10 @@ public class OrbManager : MonoBehaviour
             Vector2 pos = new Vector2(x, y);
 
             GameObject orb = Instantiate(orbPrefab, pos, Quaternion.identity);
+
+            OrbId id = orb.AddComponent<OrbId>();
+            id.id = i;
+
             orbs.Add(orb);
         }
     }

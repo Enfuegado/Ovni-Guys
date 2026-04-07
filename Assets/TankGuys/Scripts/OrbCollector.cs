@@ -6,8 +6,6 @@ public class OrbCollector : MonoBehaviour
     public int winScore = 10;
     public float collectRadius = 0.6f;
 
-    public Vector3 winPosition = new Vector3(9999, 9999, 0);
-
     private GameManagerHTTP gameManager;
     private GameObject localPlayer;
 
@@ -52,10 +50,15 @@ public class OrbCollector : MonoBehaviour
 
     void CollectOrb(GameObject orb)
     {
+        OrbId orbId = orb.GetComponent<OrbId>();
+        if (orbId == null) return;
+
         Destroy(orb);
         score++;
 
         UpdateScoreUI();
+
+        gameManager.SetEventZ(1000f + orbId.id);
 
         if (score >= winScore)
         {
@@ -77,20 +80,7 @@ public class OrbCollector : MonoBehaviour
     {
         hasWon = true;
 
-        localPlayer.transform.position = winPosition;
-
-        ServerData winData = new ServerData
-        {
-            posX = winPosition.x,
-            posY = winPosition.y,
-            posZ = winPosition.z
-        };
-
-        StartCoroutine(gameManager.apiClient.PostPlayerData(
-            gameManager.GetGameId(),
-            gameManager.GetPlayerId().ToString(),
-            winData
-        ));
+        gameManager.SetEventZ(9999f);
 
         var endUI = FindObjectOfType<GameEndUIController>();
         if (endUI != null)

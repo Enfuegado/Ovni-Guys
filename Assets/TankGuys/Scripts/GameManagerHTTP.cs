@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameManagerHTTP : MonoBehaviour
 {
@@ -7,8 +8,6 @@ public class GameManagerHTTP : MonoBehaviour
     public SpawnManager spawnManager;
     public GameObject[] playerPrefabs;
     public TextMeshProUGUI statusText;
-
-    public Vector3 winPosition = new Vector3(9999, 9999, 0);
 
     private int playerId;
     private int otherId;
@@ -22,10 +21,19 @@ public class GameManagerHTTP : MonoBehaviour
     private bool otherPlayerFound = false;
     private bool gameEnded = false;
 
+    private float persistentZ = 0f;
+
+    private HashSet<int> processedOrbs = new HashSet<int>();
+
+    private int remoteScore = 0;
+    private ScoreUI scoreUI;
+
     void Start()
     {
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
+
+        scoreUI = FindObjectOfType<ScoreUI>();
 
         LoadFromMatchmaking();
 
@@ -116,10 +124,20 @@ public class GameManagerHTTP : MonoBehaviour
         {
             posX = pos.x,
             posY = pos.y,
-            posZ = pos.z
+            posZ = persistentZ
         };
 
         StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), data));
+    }
+
+    public void SetEventZ(float z)
+    {
+        persistentZ = z;
+
+        if (z >= 9000f)
+        {
+            gameEnded = true;
+        }
     }
 
     void GetOtherPlayer()
@@ -131,7 +149,7 @@ public class GameManagerHTTP : MonoBehaviour
     {
         if (data == null) return;
 
-        Vector3 targetPos = new Vector3(data.posX, data.posY, data.posZ);
+        Vector3 targetPos = new Vector3(data.posX, data.posY, 0f);
 
         if (!otherPlayerFound)
         {
@@ -142,47 +160,67 @@ public class GameManagerHTTP : MonoBehaviour
         if (remotePlayer != null)
         {
             Vector3 current = remotePlayer.transform.position;
-
-            Vector3 last = interpolator.GetLastPosition(otherId);
             Vector3 newPos = interpolator.GetPosition(otherId, current, targetPos);
-
             remotePlayer.transform.position = newPos;
-
-            CheckOrbPath(last, targetPos);
         }
 
-        CheckRemoteWin(targetPos);
+        ProcessRemoteEvents(data.posZ);
     }
 
-    void CheckOrbPath(Vector3 from, Vector3 to)
+    void ProcessRemoteEvents(float z)
+    {
+        if (z >= 9000f)
+        {
+            if (!gameEnded)
+            {
+                gameEnded = true;
+
+                var endUI = FindObjectOfType<GameEndUIController>();
+                if (endUI != null)
+                    endUI.ShowResult(false, otherId);
+            }
+            return;
+        }
+
+        if (gameEnded) return;
+
+        if (z >= 1000f)
+        {
+            int orbId = (int)(z - 1000f);
+
+            if (processedOrbs.Contains(orbId)) return;
+
+            processedOrbs.Add(orbId);
+
+            RemoveOrbById(orbId);
+            AddRemoteScore();
+        }
+    }
+
+    void AddRemoteScore()
+    {
+        remoteScore++;
+
+        if (scoreUI == null) return;
+
+        if (playerId == 0)
+            scoreUI.SetRedScore(remoteScore);
+        else
+            scoreUI.SetBlueScore(remoteScore);
+    }
+
+    void RemoveOrbById(int id)
     {
         GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
 
         foreach (GameObject orb in orbs)
         {
-            float dist = Vector3.Distance(orb.transform.position, from);
-
-            if (dist < 0.6f)
+            OrbId orbId = orb.GetComponent<OrbId>();
+            if (orbId != null && orbId.id == id)
             {
                 Destroy(orb);
                 break;
             }
-        }
-    }
-
-    void CheckRemoteWin(Vector3 pos)
-    {
-        if (gameEnded) return;
-
-        float dist = Vector2.Distance(pos, winPosition);
-
-        if (dist < 2f)
-        {
-            gameEnded = true;
-
-            var endUI = FindObjectOfType<GameEndUIController>();
-            if (endUI != null)
-                endUI.ShowResult(false, otherId);
         }
     }
 
