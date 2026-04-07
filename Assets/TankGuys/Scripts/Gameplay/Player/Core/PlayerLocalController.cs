@@ -8,6 +8,9 @@ public class PlayerLocalController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float turretRotationSpeed = 15f;
 
+    public float width = 24f;
+    public float height = 12f;
+
     void Start()
     {
         turret = transform.Find("Turret");
@@ -29,6 +32,8 @@ public class PlayerLocalController : MonoBehaviour
         Vector3 move = new Vector3(input.x, input.y, 0f);
         transform.position += move * moveSpeed * Time.deltaTime;
 
+        ClampPosition();
+
         if (move.sqrMagnitude > 0.01f)
         {
             float angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
@@ -39,6 +44,19 @@ public class PlayerLocalController : MonoBehaviour
                 rotationSpeed * Time.deltaTime
             );
         }
+    }
+
+    private void ClampPosition()
+    {
+        float halfW = width * 0.5f;
+        float halfH = height * 0.5f;
+
+        Vector3 pos = transform.position;
+
+        pos.x = Mathf.Clamp(pos.x, -halfW, halfW);
+        pos.y = Mathf.Clamp(pos.y, -halfH, halfH);
+
+        transform.position = pos;
     }
 
     private void HandleTurret()
