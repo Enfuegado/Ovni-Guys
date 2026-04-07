@@ -101,7 +101,6 @@ public class GameManagerHTTP : MonoBehaviour
         remotePlayer = Instantiate(prefab, pos, Quaternion.identity);
         remotePlayer.name = "REMOTE";
 
-        remotePlayer.AddComponent<PlayerRemoteController>();
 
         var tag = remotePlayer.GetComponent<PlayerTag>();
         if (tag != null)

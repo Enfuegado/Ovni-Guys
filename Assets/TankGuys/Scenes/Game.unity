@@ -722,8 +722,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbManager
   orbPrefab: {fileID: 6124320689019771780, guid: 844cc5e5e0ae06d45b3999767770999e, type: 3}
-  orbCount: 20
-  radius: 6
+  totalOrbs: 30
+  spawnDuration: 20
+  width: 24
+  height: 12
+  minDistance: 1.5
+  maxAttemptsPerOrb: 50
 --- !u!4 &554150389
 Transform:
   m_ObjectHideFlags: 0
@@ -1087,7 +1091,6 @@ MonoBehaviour:
   score: 0
   winScore: 10
   collectRadius: 0.6
-  winPosition: {x: 9999, y: 9999, z: 0}
 --- !u!4 &988801390
 Transform:
   m_ObjectHideFlags: 0
@@ -1113,6 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049356313}
   - component: {fileID: 1049356312}
+  - component: {fileID: 1049356314}
   m_Layer: 0
   m_Name: Arena
   m_TagString: Untagged
@@ -1169,15 +1173,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4473841763632299001, guid: aac91babc12228e4fb7db6c5e6890280, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 6.8, y: 6.69}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1049356313
 Transform:
@@ -1194,6 +1198,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1049356314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049356311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef4fad833b059647b4a48e08609d26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaBoundsVisualizer
+  width: 24
+  height: 12
+  borderColor: {r: 0, g: 0.3660378, b: 0, a: 1}
+  fillColor: {r: 0, g: 1, b: 0, a: 0.1}
 --- !u!1 &1149913983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,7 +1875,6 @@ MonoBehaviour:
   - {fileID: 3151234818025903415, guid: 41ba20566cf7aa9479acfa00f8d17b1d, type: 3}
   - {fileID: 3151234818025903415, guid: 75a1c41a4c1b6334c80680ca38fc12a8, type: 3}
   statusText: {fileID: 2046510439}
-  winPosition: {x: 9999, y: 9999, z: 0}
 --- !u!4 &1820962293
 Transform:
   m_ObjectHideFlags: 0
