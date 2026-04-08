@@ -16,7 +16,7 @@ public class PlayerMovementInterpolator
         Vector3 last = lastPositions[id];
         lastPositions[id] = target;
 
-        float speed = 20f;
+        float speed = 60f;
         return Vector3.Lerp(current, target, speed * Time.deltaTime);
     }
 
