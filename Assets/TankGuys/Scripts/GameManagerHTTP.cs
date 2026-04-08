@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class GameManagerHTTP : MonoBehaviour
 {
@@ -18,15 +17,16 @@ public class GameManagerHTTP : MonoBehaviour
 
     private PlayerMovementInterpolator interpolator = new PlayerMovementInterpolator();
 
+    private NetworkSync network;
+    private EventProcessor events;
+
     private bool otherPlayerFound = false;
     private bool gameEnded = false;
 
     private float persistentZ = 0f;
 
-    private HashSet<int> processedOrbs = new HashSet<int>();
-
-    private int remoteScore = 0;
     private ScoreUI scoreUI;
+    private int remoteScore = 0;
 
     void Start()
     {
@@ -34,6 +34,9 @@ public class GameManagerHTTP : MonoBehaviour
         Application.targetFrameRate = 60;
 
         scoreUI = FindObjectOfType<ScoreUI>();
+
+        network = new NetworkSync(apiClient);
+        events = new EventProcessor();
 
         LoadFromMatchmaking();
 
@@ -88,10 +91,6 @@ public class GameManagerHTTP : MonoBehaviour
 
         var controller = localPlayer.AddComponent<PlayerLocalController>();
         controller.enabled = false;
-
-        var tag = localPlayer.GetComponent<PlayerTag>();
-        if (tag != null)
-            tag.PlayerId = playerId;
     }
 
     void SpawnRemotePlayer(Vector3 pos)
@@ -100,20 +99,15 @@ public class GameManagerHTTP : MonoBehaviour
 
         remotePlayer = Instantiate(prefab, pos, Quaternion.identity);
         remotePlayer.name = "REMOTE";
-
-
-        var tag = remotePlayer.GetComponent<PlayerTag>();
-        if (tag != null)
-            tag.PlayerId = otherId;
     }
 
     void SyncLoop()
     {
-        SendMyPosition();
-        GetOtherPlayer();
+        SendMyData();
+        GetOtherData();
     }
 
-    void SendMyPosition()
+    void SendMyData()
     {
         if (localPlayer == null) return;
 
@@ -126,25 +120,15 @@ public class GameManagerHTTP : MonoBehaviour
             posZ = persistentZ
         };
 
-        StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), data));
+        network.Send(gameId, playerId, data, this);
     }
 
-    public void SetEventZ(float z)
+    void GetOtherData()
     {
-        persistentZ = z;
-
-        if (z >= 9000f)
-        {
-            gameEnded = true;
-        }
+        network.Receive(gameId, otherId, OnOtherData, this);
     }
 
-    void GetOtherPlayer()
-    {
-        StartCoroutine(apiClient.GetPlayerData(gameId, otherId.ToString(), OnOtherPlayerData));
-    }
-
-    void OnOtherPlayerData(ServerData data)
+    void OnOtherData(ServerData data)
     {
         if (data == null) return;
 
@@ -163,12 +147,12 @@ public class GameManagerHTTP : MonoBehaviour
             remotePlayer.transform.position = newPos;
         }
 
-        ProcessRemoteEvents(data.posZ);
+        ProcessEvents(data.posZ);
     }
 
-    void ProcessRemoteEvents(float z)
+    void ProcessEvents(float z)
     {
-        if (z >= 9000f)
+        if (events.IsGameEnd(z))
         {
             if (!gameEnded)
             {
@@ -183,15 +167,11 @@ public class GameManagerHTTP : MonoBehaviour
 
         if (gameEnded) return;
 
-        if (z >= 1000f)
+        int? orbId = events.GetOrbId(z);
+
+        if (orbId.HasValue)
         {
-            int orbId = (int)(z - 1000f);
-
-            if (processedOrbs.Contains(orbId)) return;
-
-            processedOrbs.Add(orbId);
-
-            RemoveOrbById(orbId);
+            RemoveOrbById(orbId.Value);
             AddRemoteScore();
         }
     }
@@ -223,18 +203,15 @@ public class GameManagerHTTP : MonoBehaviour
         }
     }
 
-    public GameObject GetLocalPlayer()
+    public void SetEventZ(float z)
     {
-        return localPlayer;
+        persistentZ = z;
+
+        if (z >= 9000f)
+            gameEnded = true;
     }
 
-    public int GetPlayerId()
-    {
-        return playerId;
-    }
-
-    public string GetGameId()
-    {
-        return gameId;
-    }
+    public GameObject GetLocalPlayer() => localPlayer;
+    public int GetPlayerId() => playerId;
+    public string GetGameId() => gameId;
 }
