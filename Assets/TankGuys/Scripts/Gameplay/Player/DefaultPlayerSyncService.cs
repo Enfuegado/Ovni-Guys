@@ -21,7 +21,6 @@ public class DefaultPlayerSyncService : IPlayerSyncService
         var local = players.GetLocal();
         if (local == null) return;
 
-        // 🔥 crear label YOU
         if (youLabelPrefab != null)
         {
             var label = GameObject.Instantiate(youLabelPrefab);
