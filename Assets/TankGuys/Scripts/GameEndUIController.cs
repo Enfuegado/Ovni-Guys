@@ -20,7 +20,7 @@ public class GameEndUIController : MonoBehaviour
 
         if (resultText != null)
         {
-            resultText.text = didWin ? "GANASTE" : "PERDISTE";
+            resultText.text = didWin ? "WINNER" : "LOSER";
             resultText.color = didWin ? Color.green : Color.red;
         }
 

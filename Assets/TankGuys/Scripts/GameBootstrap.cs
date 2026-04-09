@@ -6,6 +6,8 @@ public class GameBootstrap : MonoBehaviour
     public SpawnManager spawnManager;
     public GameObject[] playerPrefabs;
 
+    public GameObject youLabelPrefab;
+
     void Awake()
     {
         var gameManager = FindFirstObjectByType<GameManagerHTTP>();
@@ -23,7 +25,9 @@ public class GameBootstrap : MonoBehaviour
         var scoreUI = FindFirstObjectByType<ScoreUI>();
         gameState.Initialize(scoreUI);
 
-        IPlayerSyncService playerSync = new DefaultPlayerSyncService(spawnManager, playerPrefabs);
+        var playerSync = new DefaultPlayerSyncService(spawnManager, playerPrefabs);
+
+        playerSync.youLabelPrefab = youLabelPrefab;
 
         gameManager.Init(network, gameState, playerSync, playerId);
     }

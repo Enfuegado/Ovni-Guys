@@ -4,6 +4,8 @@ using TMPro;
 public class GameManagerHTTP : MonoBehaviour
 {
     public TextMeshProUGUI statusText;
+    public TextMeshProUGUI objectiveText;
+
     public float syncInterval = 0.02f;
 
     private int playerId;
@@ -81,7 +83,6 @@ public class GameManagerHTTP : MonoBehaviour
 
         var data = gameState.BuildLocalData(local.transform.position);
 
-        // 🔥 ENVÍO INMEDIATO
         network.Send(gameId, playerId, data);
     }
 
@@ -91,13 +92,19 @@ public class GameManagerHTTP : MonoBehaviour
 
         if (playerId == 0)
         {
-            statusText.text = "BLUE";
+            statusText.text = "BLUE TEAM";
             statusText.color = Color.blue;
+
+            if (objectiveText != null)
+                objectiveText.text = "COLLECT 10 ORBS BEFORE THE RED TEAM";
         }
         else
         {
-            statusText.text = "RED";
+            statusText.text = "RED TEAM";
             statusText.color = Color.red;
+
+            if (objectiveText != null)
+                objectiveText.text = "COLLECT 10 ORBS BEFORE THE BLUE TEAM";
         }
     }
 
