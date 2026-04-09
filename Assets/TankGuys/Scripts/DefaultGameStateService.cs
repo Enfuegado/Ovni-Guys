@@ -11,29 +11,18 @@ public class DefaultGameStateService : IGameStateService
     private int remoteScore = 0;
     private ScoreUI scoreUI;
 
-    private int finalStateRepeats = 0;
-
     public DefaultGameStateService(int playerId)
     {
         this.playerId = playerId;
-        scoreUI = Object.FindFirstObjectByType<ScoreUI>();
+    }
+
+    public void Initialize(ScoreUI scoreUI)
+    {
+        this.scoreUI = scoreUI;
     }
 
     public ServerData BuildLocalData(Vector3 pos)
     {
-        // 🔥 CLAVE: repetir estado final varias veces
-        if (gameEnded)
-        {
-            finalStateRepeats++;
-
-            return new ServerData
-            {
-                posX = pos.x,
-                posY = pos.y,
-                posZ = persistentZ
-            };
-        }
-
         return new ServerData
         {
             posX = pos.x,
@@ -99,9 +88,6 @@ public class DefaultGameStateService : IGameStateService
         persistentZ = z;
 
         if (z >= 9000f)
-        {
             gameEnded = true;
-            finalStateRepeats = 0;
-        }
     }
 }

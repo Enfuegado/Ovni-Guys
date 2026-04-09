@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using System.IO;
 using TMPro;
 
 public class Matchmaking : MonoBehaviour
@@ -12,131 +11,123 @@ public class Matchmaking : MonoBehaviour
     public string gameId = "game1";
 
     private int playerId;
-    private int otherId;
+    private int otherPlayerId;
 
-    private FileStream lockStream;
-    private bool searching = false;
+    private bool isSearching = false;
 
-    private bool isReady = false;
-    private bool hasDelay = false;
-    private float startDelay = 0f;
+    private PlayerIdAssigner playerIdAssigner;
+    private SceneLoader sceneLoader;
 
     void Awake()
     {
         if (apiClient == null)
             apiClient = GetComponent<ApiClient>();
 
+        playerIdAssigner = new PlayerIdAssigner();
+        sceneLoader = new SceneLoader();
+
         DontDestroyOnLoad(gameObject);
     }
 
     public void FindMatch()
     {
-        if (searching) return;
+        if (isSearching) return;
 
-        searching = true;
+        isSearching = true;
 
-        if (statusText != null)
-            statusText.text = "Searching for match...";
+        SetStatus("Searching for match...");
 
-        AssignPlayerId();
+        playerId = playerIdAssigner.AssignPlayerId();
+        otherPlayerId = (playerId == 0) ? 1 : 0;
 
-        StartCoroutine(SearchLoop());
+        StartCoroutine(MatchLoop());
     }
 
-    void AssignPlayerId()
+    IEnumerator MatchLoop()
     {
-        string lock0 = Path.Combine(Application.persistentDataPath, "lock0");
-        string lock1 = Path.Combine(Application.persistentDataPath, "lock1");
+        float matchStartDelay = -1f;
 
-        try
-        {
-            lockStream = new FileStream(lock0, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            playerId = 0;
-        }
-        catch
-        {
-            lockStream = new FileStream(lock1, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            playerId = 1;
-        }
-
-        otherId = (playerId == 0) ? 1 : 0;
-    }
-
-    IEnumerator SearchLoop()
-    {
         while (true)
         {
-            ServerData readyData = new ServerData
+            yield return SendReadyState();
+
+            ServerData otherPlayerData = null;
+
+            yield return StartCoroutine(apiClient.GetPlayerData(gameId, otherPlayerId.ToString(), (data) =>
             {
-                posX = playerId,
-                posY = 1000,
-                posZ = 0f
-            };
-
-            yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), readyData));
-
-            ServerData other = null;
-
-            yield return StartCoroutine(apiClient.GetPlayerData(gameId, otherId.ToString(), (data) =>
-            {
-                other = data;
+                otherPlayerData = data;
             }));
 
-            if (other != null && other.posY == 1000 && other.posX != playerId)
+            if (IsOtherPlayerReady(otherPlayerData))
             {
-                if (playerId == 0 && !hasDelay)
+                if (playerId == 0 && matchStartDelay < 0f)
                 {
-                    startDelay = 3f;
-                    hasDelay = true;
-
-                    ServerData startData = new ServerData
-                    {
-                        posX = playerId,
-                        posY = 1000,
-                        posZ = startDelay
-                    };
-
-                    yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), startData));
+                    matchStartDelay = 3f;
+                    yield return SendStartSignal(matchStartDelay);
                 }
 
-                if (other.posZ > 0f && !hasDelay)
+                if (otherPlayerData.posZ > 0f && matchStartDelay < 0f)
                 {
-                    startDelay = other.posZ;
-                    hasDelay = true;
+                    matchStartDelay = otherPlayerData.posZ;
                 }
 
-                if (hasDelay)
+                if (matchStartDelay >= 0f)
                 {
-                    if (statusText != null)
-                        statusText.text = "Match found!";
+                    SetStatus("Match found!");
 
-                    yield return new WaitForSeconds(startDelay);
-                    SceneManager.LoadScene("Game");
+                    yield return new WaitForSeconds(matchStartDelay);
+
+                    sceneLoader.LoadGame();
                     yield break;
                 }
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    IEnumerator SendReadyState()
+    {
+        ServerData requestData = new ServerData
+        {
+            posX = playerId,
+            posY = 1000,
+            posZ = 0f
+        };
+
+        return apiClient.PostPlayerData(gameId, playerId.ToString(), requestData);
+    }
+
+    IEnumerator SendStartSignal(float delay)
+    {
+        ServerData requestData = new ServerData
+        {
+            posX = playerId,
+            posY = 1000,
+            posZ = delay
+        };
+
+        return apiClient.PostPlayerData(gameId, playerId.ToString(), requestData);
+    }
+
+    bool IsOtherPlayerReady(ServerData otherPlayerData)
+    {
+        return otherPlayerData != null &&
+               otherPlayerData.posY == 1000 &&
+               otherPlayerData.posX != playerId;
+    }
+
+    void SetStatus(string text)
+    {
+        if (statusText != null)
+            statusText.text = text;
     }
 
     public void Cleanup()
     {
-        if (lockStream != null)
-        {
-            lockStream.Close();
-            lockStream.Dispose();
-            lockStream = null;
-        }
+        playerIdAssigner.Cleanup();
     }
 
-    public int GetPlayerId()
-    {
-        return playerId;
-    }
-
-    public string GetGameId()
-    {
-        return gameId;
-    }
+    public int GetPlayerId() => playerId;
+    public string GetGameId() => gameId;
 }

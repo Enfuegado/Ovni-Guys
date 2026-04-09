@@ -9,15 +9,20 @@ public class GameBootstrap : MonoBehaviour
     void Awake()
     {
         var gameManager = FindFirstObjectByType<GameManagerHTTP>();
-        var mm = FindFirstObjectByType<Matchmaking>();
+        var matchmaking = FindFirstObjectByType<Matchmaking>();
 
         int playerId = 0;
 
-        if (mm != null)
-            playerId = mm.GetPlayerId();
+        if (matchmaking != null)
+            playerId = matchmaking.GetPlayerId();
 
         INetworkService network = new HttpNetworkService(apiClient, this);
-        IGameStateService gameState = new DefaultGameStateService(playerId);
+
+        var gameState = new DefaultGameStateService(playerId);
+
+        var scoreUI = FindFirstObjectByType<ScoreUI>();
+        gameState.Initialize(scoreUI);
+
         IPlayerSyncService playerSync = new DefaultPlayerSyncService(spawnManager, playerPrefabs);
 
         gameManager.Init(network, gameState, playerSync, playerId);
