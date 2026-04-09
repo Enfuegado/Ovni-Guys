@@ -15,8 +15,8 @@ public class OrbCollector : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManagerHTTP>();
-        scoreUI = FindObjectOfType<ScoreUI>();
+        gameManager = FindFirstObjectByType<GameManagerHTTP>();
+        scoreUI = FindFirstObjectByType<ScoreUI>();
     }
 
     void Update()
@@ -24,9 +24,10 @@ public class OrbCollector : MonoBehaviour
         if (gameManager == null) return;
 
         if (localPlayer == null)
+        {
             localPlayer = gameManager.GetLocalPlayer();
-
-        if (localPlayer == null) return;
+            if (localPlayer == null) return;
+        }
 
         if (!hasWon)
             CheckLocalCollection();
@@ -58,11 +59,19 @@ public class OrbCollector : MonoBehaviour
 
         UpdateScoreUI();
 
-        gameManager.SetEventZ(1000f + orbId.id);
-
         if (score >= winScore)
         {
-            WinGame();
+            hasWon = true;
+
+            gameManager.SendImmediateEvent(9000f + orbId.id);
+
+            var endUI = FindFirstObjectByType<GameEndUIController>();
+            if (endUI != null)
+                endUI.ShowResult(true, gameManager.GetPlayerId());
+        }
+        else
+        {
+            gameManager.SetEventZ(1000f + orbId.id);
         }
     }
 
@@ -74,16 +83,5 @@ public class OrbCollector : MonoBehaviour
             scoreUI.SetBlueScore(score);
         else
             scoreUI.SetRedScore(score);
-    }
-
-    void WinGame()
-    {
-        hasWon = true;
-
-        gameManager.SetEventZ(9999f);
-
-        var endUI = FindObjectOfType<GameEndUIController>();
-        if (endUI != null)
-            endUI.ShowResult(true, gameManager.GetPlayerId());
     }
 }

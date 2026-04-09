@@ -11,6 +11,8 @@ public class DefaultGameStateService : IGameStateService
     private int remoteScore = 0;
     private ScoreUI scoreUI;
 
+    private int finalStateRepeats = 0;
+
     public DefaultGameStateService(int playerId)
     {
         this.playerId = playerId;
@@ -19,8 +21,18 @@ public class DefaultGameStateService : IGameStateService
 
     public ServerData BuildLocalData(Vector3 pos)
     {
+        // 🔥 CLAVE: repetir estado final varias veces
         if (gameEnded)
-            return new ServerData { posX = 0, posY = 0, posZ = 9999f };
+        {
+            finalStateRepeats++;
+
+            return new ServerData
+            {
+                posX = pos.x,
+                posY = pos.y,
+                posZ = persistentZ
+            };
+        }
 
         return new ServerData
         {
@@ -32,7 +44,17 @@ public class DefaultGameStateService : IGameStateService
 
     public void ProcessRemoteData(ServerData data, int otherId)
     {
-        if (events.IsGameEnd(data.posZ))
+        float z = data.posZ;
+
+        int? orbId = events.GetOrbId(z);
+
+        if (orbId.HasValue)
+        {
+            RemoveOrb(orbId.Value);
+            AddRemoteScore();
+        }
+
+        if (events.IsGameEnd(z))
         {
             if (!gameEnded)
             {
@@ -42,17 +64,6 @@ public class DefaultGameStateService : IGameStateService
                 if (endUI != null)
                     endUI.ShowResult(false, otherId);
             }
-            return;
-        }
-
-        if (gameEnded) return;
-
-        int? orbId = events.GetOrbId(data.posZ);
-
-        if (orbId.HasValue)
-        {
-            RemoveOrb(orbId.Value);
-            AddRemoteScore();
         }
     }
 
@@ -85,11 +96,12 @@ public class DefaultGameStateService : IGameStateService
 
     public void SetEventZ(float z)
     {
-        if (gameEnded) return;
-
         persistentZ = z;
 
         if (z >= 9000f)
+        {
             gameEnded = true;
+            finalStateRepeats = 0;
+        }
     }
 }

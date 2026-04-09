@@ -3,28 +3,29 @@ using UnityEngine;
 
 public class PlayerMovementInterpolator
 {
-    private Dictionary<int, Vector3> lastPositions = new();
+    private Dictionary<int, Vector3> velocities = new();
 
     public Vector3 GetPosition(int id, Vector3 current, Vector3 target)
     {
-        if (!lastPositions.ContainsKey(id))
+        if (!velocities.ContainsKey(id))
         {
-            lastPositions[id] = target;
+            velocities[id] = Vector3.zero;
             return target;
         }
 
-        Vector3 last = lastPositions[id];
-        lastPositions[id] = target;
+        float smoothTime = 0.025f; // 🔥 más rápido = menos delay
 
-        float speed = 60f;
-        return Vector3.Lerp(current, target, speed * Time.deltaTime);
-    }
+        Vector3 velocity = velocities[id];
 
-    public Vector3 GetLastPosition(int id)
-    {
-        if (lastPositions.ContainsKey(id))
-            return lastPositions[id];
+        Vector3 result = Vector3.SmoothDamp(
+            current,
+            target, // ❌ sin predicción
+            ref velocity,
+            smoothTime
+        );
 
-        return Vector3.zero;
+        velocities[id] = velocity;
+
+        return result;
     }
 }

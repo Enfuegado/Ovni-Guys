@@ -1,46 +1,49 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 public class GameManagerHTTP : MonoBehaviour
 {
-    public ApiClient apiClient;
-    public SpawnManager spawnManager;
-    public GameObject[] playerPrefabs;
     public TextMeshProUGUI statusText;
     public float syncInterval = 0.02f;
 
     private int playerId;
     private int otherId;
-    private string gameId;
+    private string gameId = "game1";
 
     private INetworkService network;
     private IGameStateService gameState;
     private IPlayerSyncService playerSync;
 
     private float timer;
-    private bool isRequesting;
+    private bool initialized = false;
 
-    void Awake()
+    public void Init(
+        INetworkService network,
+        IGameStateService gameState,
+        IPlayerSyncService playerSync,
+        int playerId)
     {
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
 
-        LoadFromMatchmaking();
+        this.network = network;
+        this.gameState = gameState;
+        this.playerSync = playerSync;
+        this.playerId = playerId;
 
         otherId = (playerId == 0) ? 1 : 0;
-
-        network = new HttpNetworkService(apiClient, this);
-        gameState = new DefaultGameStateService(playerId);
-        playerSync = new DefaultPlayerSyncService(spawnManager, playerPrefabs);
 
         playerSync.SpawnLocal(playerId);
 
         SetStatus();
+
+        initialized = true;
     }
 
     void Update()
     {
+        if (!initialized) return;
+
         timer += Time.deltaTime;
 
         if (timer >= syncInterval)
@@ -53,43 +56,33 @@ public class GameManagerHTTP : MonoBehaviour
     void Tick()
     {
         var local = playerSync.GetLocal();
-
         if (local == null) return;
 
         var data = gameState.BuildLocalData(local.transform.position);
 
         network.Send(gameId, playerId, data);
-
-        if (!isRequesting)
-        {
-            isRequesting = true;
-            network.Receive(gameId, otherId, OnReceive);
-        }
+        network.Receive(gameId, otherId, OnReceive);
     }
 
     void OnReceive(ServerData data)
     {
-        isRequesting = false;
-
         if (data == null) return;
 
         playerSync.UpdateRemote(otherId, data);
         gameState.ProcessRemoteData(data, otherId);
     }
 
-    void LoadFromMatchmaking()
+    public void SendImmediateEvent(float z)
     {
-        Matchmaking mm = FindObjectOfType<Matchmaking>();
+        gameState.SetEventZ(z);
 
-        if (mm == null)
-        {
-            playerId = 0;
-            gameId = "game1";
-            return;
-        }
+        var local = playerSync.GetLocal();
+        if (local == null) return;
 
-        playerId = mm.GetPlayerId();
-        gameId = mm.GetGameId();
+        var data = gameState.BuildLocalData(local.transform.position);
+
+        // 🔥 ENVÍO INMEDIATO
+        network.Send(gameId, playerId, data);
     }
 
     void SetStatus()
@@ -110,6 +103,7 @@ public class GameManagerHTTP : MonoBehaviour
 
     public GameObject GetLocalPlayer()
     {
+        if (!initialized) return null;
         return playerSync.GetLocal();
     }
 
@@ -120,21 +114,6 @@ public class GameManagerHTTP : MonoBehaviour
 
     public void SetEventZ(float z)
     {
-        if (z >= 9000f)
-        {
-            StartCoroutine(SendGameEndRepeated());
-            return;
-        }
-
         gameState.SetEventZ(z);
-    }
-
-    IEnumerator SendGameEndRepeated()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            gameState.SetEventZ(9999f);
-            yield return new WaitForSeconds(0.05f);
-        }
     }
 }

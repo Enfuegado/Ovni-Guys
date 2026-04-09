@@ -1214,6 +1214,55 @@ MonoBehaviour:
   height: 12
   borderColor: {r: 0, g: 0.3660378, b: 0, a: 1}
   fillColor: {r: 0, g: 1, b: 0, a: 0.1}
+--- !u!1 &1092945075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092945077}
+  - component: {fileID: 1092945076}
+  m_Layer: 0
+  m_Name: GameBootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1092945076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092945075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa2d07c869ac434aba196d2a1292953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameBootstrap
+  apiClient: {fileID: 1508367611}
+  spawnManager: {fileID: 212740223}
+  playerPrefabs:
+  - {fileID: 3151234818025903415, guid: 41ba20566cf7aa9479acfa00f8d17b1d, type: 3}
+  - {fileID: 3151234818025903415, guid: 75a1c41a4c1b6334c80680ca38fc12a8, type: 3}
+--- !u!4 &1092945077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092945075}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 310.51654, y: 158.54065, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149913983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,6 +1529,51 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216288642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 310.51654, y: 158.54065, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1508367610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508367612}
+  - component: {fileID: 1508367611}
+  m_Layer: 0
+  m_Name: ApiClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1508367611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508367610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b585c38ad46c4eb19f8f94bc26267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApiClient
+  baseUrl: http://localhost:5005/server
+--- !u!4 &1508367612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508367610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 310.51654, y: 158.54065, z: 0}
@@ -1869,12 +1963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395a7dace16decb48993533e8e05157f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerHTTP
-  apiClient: {fileID: 1820962291}
-  spawnManager: {fileID: 212740223}
-  playerPrefabs:
-  - {fileID: 3151234818025903415, guid: 41ba20566cf7aa9479acfa00f8d17b1d, type: 3}
-  - {fileID: 3151234818025903415, guid: 75a1c41a4c1b6334c80680ca38fc12a8, type: 3}
   statusText: {fileID: 2046510439}
+  syncInterval: 0.02
 --- !u!4 &1820962293
 Transform:
   m_ObjectHideFlags: 0
@@ -2505,3 +2595,5 @@ SceneRoots:
   - {fileID: 580011140}
   - {fileID: 1835518844}
   - {fileID: 1216288644}
+  - {fileID: 1092945077}
+  - {fileID: 1508367612}

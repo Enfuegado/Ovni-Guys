@@ -66,18 +66,14 @@ public class Matchmaking : MonoBehaviour
     {
         while (true)
         {
-            if (!isReady)
+            ServerData readyData = new ServerData
             {
-                ServerData readyData = new ServerData
-                {
-                    posX = playerId,
-                    posY = 1000,
-                    posZ = 0f
-                };
+                posX = playerId,
+                posY = 1000,
+                posZ = 0f
+            };
 
-                yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), readyData));
-                isReady = true;
-            }
+            yield return StartCoroutine(apiClient.PostPlayerData(gameId, playerId.ToString(), readyData));
 
             ServerData other = null;
 
@@ -86,7 +82,7 @@ public class Matchmaking : MonoBehaviour
                 other = data;
             }));
 
-            if (other != null && other.posY == 1000)
+            if (other != null && other.posY == 1000 && other.posX != playerId)
             {
                 if (playerId == 0 && !hasDelay)
                 {
