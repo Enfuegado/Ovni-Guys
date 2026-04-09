@@ -1,0 +1,40 @@
+using UnityEngine;
+
+public class DefaultPlayerSyncService : IPlayerSyncService
+{
+    private PlayerManager players;
+    private PlayerMovementInterpolator interpolator = new PlayerMovementInterpolator();
+
+    private bool spawned = false;
+
+    public DefaultPlayerSyncService(SpawnManager spawnManager, GameObject[] prefabs)
+    {
+        players = new PlayerManager(spawnManager, prefabs);
+    }
+
+    public void SpawnLocal(int id)
+    {
+        players.SpawnLocal(id);
+    }
+
+    public void UpdateRemote(int id, ServerData data)
+    {
+        Vector3 target = new Vector3(data.posX, data.posY, 0f);
+
+        if (!spawned)
+        {
+            players.SpawnRemote(id, target);
+            spawned = true;
+        }
+
+        var remote = players.GetRemote();
+        if (remote == null) return;
+
+        Vector3 current = remote.transform.position;
+        Vector3 newPos = interpolator.GetPosition(id, current, target);
+
+        remote.transform.position = newPos;
+    }
+
+    public GameObject GetLocal() => players.GetLocal();
+}

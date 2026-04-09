@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameStateController
+public class DefaultGameStateService : IGameStateService
 {
     private EventProcessor events = new EventProcessor();
 
@@ -11,18 +11,16 @@ public class GameStateController
     private int remoteScore = 0;
     private ScoreUI scoreUI;
 
-    public GameStateController(int playerId)
+    public DefaultGameStateService(int playerId)
     {
         this.playerId = playerId;
-        scoreUI = Object.FindObjectOfType<ScoreUI>();
+        scoreUI = Object.FindFirstObjectByType<ScoreUI>();
     }
 
     public ServerData BuildLocalData(Vector3 pos)
     {
         if (gameEnded)
-        {
             return new ServerData { posX = 0, posY = 0, posZ = 9999f };
-        }
 
         return new ServerData
         {
@@ -40,7 +38,7 @@ public class GameStateController
             {
                 gameEnded = true;
 
-                var endUI = Object.FindObjectOfType<GameEndUIController>();
+                var endUI = Object.FindFirstObjectByType<GameEndUIController>();
                 if (endUI != null)
                     endUI.ShowResult(false, otherId);
             }
@@ -54,11 +52,11 @@ public class GameStateController
         if (orbId.HasValue)
         {
             RemoveOrb(orbId.Value);
-            AddScore();
+            AddRemoteScore();
         }
     }
 
-    void AddScore()
+    void AddRemoteScore()
     {
         remoteScore++;
 

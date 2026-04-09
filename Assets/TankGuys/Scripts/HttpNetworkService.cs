@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class NetworkController
+public class HttpNetworkService : INetworkService
 {
     private ApiClient api;
     private MonoBehaviour runner;
 
-    public NetworkController(ApiClient api, MonoBehaviour runner)
+    public HttpNetworkService(ApiClient api, MonoBehaviour runner)
     {
         this.api = api;
         this.runner = runner;
