@@ -20,6 +20,9 @@ public class Matchmaking : MonoBehaviour
 
     void Awake()
     {
+        Application.runInBackground = true;
+        Application.targetFrameRate = 60;
+
         if (apiClient == null)
             apiClient = GetComponent<ApiClient>();
 
