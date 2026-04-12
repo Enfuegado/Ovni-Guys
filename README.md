@@ -35,7 +35,7 @@ Juego de recoleccion en tiempo real para 2 jugadores, desarrollado en Unity con 
 
 Durante la partida, vacas (orbs) aparecen de forma escalonada en posiciones generadas con semilla fija, garantizando el mismo mapa para los dos clientes. Cada jugador ve al oponente moviendose en tiempo real. El primero en recolectar 10 vacas gana; la pantalla de resultado se muestra de forma simultanea en ambos clientes.
 
-![Gameplay overview](Assets/OvniGuys/Art/DocumentationImages/gameplay_overview.png)
+![Gameplay overview](Assets/OvniGuys/Art/DocumentationImages/gameplay_overview.PNG)
 
 ---
 
@@ -67,13 +67,13 @@ Asegurarse de que el servidor de clase este corriendo en `http://localhost:5005`
 
 Compilar el proyecto desde Unity (`File > Build & Run`) y ejecutar dos copias del binario. Tambien es posible usar una instancia en el editor y otra como build.
 
-![Main menu](Assets/OvniGuys/Art/DocumentationImages/main_menu.png)
+![Main menu](Assets/OvniGuys/Art/DocumentationImages/main_menu.PNG)
 
 ### Paso 3 — Buscar partida
 
 En cada instancia, presionar **"Find Match"**. El sistema de matchmaking asigna automaticamente `Player 0` a la primera instancia que se registra y `Player 1` a la segunda.
 
-![Matchmaking screen](Assets/OvniGuys/Art/DocumentationImages/matchmaking_screen.png)
+![Matchmaking screen](Assets/OvniGuys/Art/DocumentationImages/matchmaking_screen.PNG)
 
 ### Paso 4 — Jugar
 
@@ -187,9 +187,9 @@ Con `syncInterval = 0.02 s` el cliente realiza 50 pares de peticiones por segund
   - Boton de salida regresa al menu principal
 ```
 
-![Game UI](Assets/OvniGuys/Art/DocumentationImages/game_ui.png)
+![Game UI](Assets/OvniGuys/Art/DocumentationImages/game_ui.PNG)
 
-![Winner screen](Assets/OvniGuys/Art/DocumentationImages/winner_screen.png)
+![Winner screen](Assets/OvniGuys/Art/DocumentationImages/winner_screen.PNG)
 
 **Condiciones especiales:**
 - Si un jugador se desconecta antes del fin de partida, el oponente permanece en pantalla sin actualizacion. No hay deteccion de timeout.
