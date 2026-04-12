@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-[![Unity](https://img.shields.io/badge/Unity-2022.3%20LTS-black?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/)
+[![Unity](https://img.shields.io/badge/Unity-6000.3.8f1-black?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/)
 [![CSharp](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)](https://learn.microsoft.com/en-us/dotnet/csharp/)
 [![dotNET](https://img.shields.io/badge/.NET-Standard%202.1-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
 [![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D4?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
@@ -10,7 +10,7 @@
 
 <br />
 
-# Ovni Guys Race Arena — Juego Multijugador en Servidor Dedicado
+# Ovni Guys Race Arena — Juego Multijugador en Red
 
 Juego de recoleccion en tiempo real para 2 jugadores, desarrollado en Unity con comunicacion **HTTP REST** sobre el servidor de clase. Cada jugador controla un OVNI y compite por recolectar 10 vacas antes que el oponente. No hay servidor dedicado propio; toda la sincronizacion pasa por el servidor HTTP proporcionado en clase.
 
@@ -43,7 +43,7 @@ Durante la partida, vacas (orbs) aparecen de forma escalonada en posiciones gene
 
 | Requisito | Detalle |
 |---|---|
-| Motor | Unity 6000.3.8f1 LTS |
+| Motor | Unity 2022.3 LTS |
 | Lenguaje | C# (.NET Standard 2.1) |
 | Protocolo de red | HTTP REST (`UnityWebRequest`) |
 | Servidor | `http://localhost:5005/server` (proporcionado en clase) |
@@ -65,7 +65,7 @@ Asegurarse de que el servidor de clase este corriendo en `http://localhost:5005`
 
 ### Paso 2 — Lanzar dos instancias
 
-Ejecutar dos copias del exe. Tambien es posible usar una instancia en el editor y otra como build.
+Compilar el proyecto desde Unity (`File > Build & Run`) y ejecutar dos copias del binario. Tambien es posible usar una instancia en el editor y otra como build.
 
 ![Main menu](Assets/OvniGuys/Art/DocumentationImages/main_menu.png)
 
