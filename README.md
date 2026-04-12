@@ -10,7 +10,7 @@
 
 <br />
 
-# Ovni Guys Race Arena — Juego Multijugador en Red
+# Ovni Guys Race Arena — Juego Multijugador en Servidor Dedicado
 
 Juego de recoleccion en tiempo real para 2 jugadores, desarrollado en Unity con comunicacion **HTTP REST** sobre el servidor de clase. Cada jugador controla un OVNI y compite por recolectar 10 vacas antes que el oponente. No hay servidor dedicado propio; toda la sincronizacion pasa por el servidor HTTP proporcionado en clase.
 
@@ -43,7 +43,7 @@ Durante la partida, vacas (orbs) aparecen de forma escalonada en posiciones gene
 
 | Requisito | Detalle |
 |---|---|
-| Motor | Unity 2022.3 LTS |
+| Motor | Unity 6000.3.8f1 LTS |
 | Lenguaje | C# (.NET Standard 2.1) |
 | Protocolo de red | HTTP REST (`UnityWebRequest`) |
 | Servidor | `http://localhost:5005/server` (proporcionado en clase) |
@@ -65,7 +65,7 @@ Asegurarse de que el servidor de clase este corriendo en `http://localhost:5005`
 
 ### Paso 2 — Lanzar dos instancias
 
-Compilar el proyecto desde Unity (`File > Build & Run`) y ejecutar dos copias del binario. Tambien es posible usar una instancia en el editor y otra como build.
+Ejecutar dos copias del exe. Tambien es posible usar una instancia en el editor y otra como build.
 
 ![Main menu](Assets/OvniGuys/Art/DocumentationImages/main_menu.PNG)
 
@@ -191,10 +191,6 @@ Con `syncInterval = 0.02 s` el cliente realiza 50 pares de peticiones por segund
 
 ![Winner screen](Assets/OvniGuys/Art/DocumentationImages/winner_screen.PNG)
 
-**Condiciones especiales:**
-- Si un jugador se desconecta antes del fin de partida, el oponente permanece en pantalla sin actualizacion. No hay deteccion de timeout.
-- Si el servidor no esta disponible al iniciar el matchmaking, las peticiones fallan silenciosamente y el polling continua intentando.
-
 ---
 
 ## Estructura de Scripts
@@ -203,56 +199,56 @@ Con `syncInterval = 0.02 s` el cliente realiza 50 pares de peticiones por segund
 Scripts/
 |
 +-- Core/
-|   +-- GameBootstrap              # Punto de entrada: construye e inyecta todas las dependencias
-|   +-- GameManagerHTTP            # Loop principal: gestiona el tick de sincronizacion (50 Hz)
+|   +-- GameBootstrap              
+|   +-- GameManagerHTTP            
 |
 +-- Gameplay/
 |   +-- GameState/
-|   |   +-- IGameStateService          # Interfaz del estado de juego
-|   |   +-- DefaultGameStateService    # Construye ServerData y procesa eventos remotos
-|   |   +-- EventProcessor             # Decodifica eventos del canal posZ
+|   |   +-- IGameStateService          
+|   |   +-- DefaultGameStateService    
+|   |   +-- EventProcessor           
 |   |
 |   +-- Orbs/
-|   |   +-- Orb                        # Rotacion visual del orb en el eje Z
-|   |   +-- OrbCollector               # Deteccion de colision local y logica de puntaje
-|   |   +-- OrbId                      # Identificador unico asignado a cada orb
-|   |   +-- OrbManager                 # Generacion determinista y spawn escalonado
+|   |   +-- Orb                        
+|   |   +-- OrbCollector               
+|   |   +-- OrbId                      
+|   |   +-- OrbManager               
 |   |
 |   +-- Player/
-|       +-- IPlayerSyncService         # Interfaz de sincronizacion de jugadores
-|       +-- DefaultPlayerSyncService   # Spawn e interpolacion del jugador remoto
-|       +-- PlayerLabel                # Etiqueta YOU flotante sobre el jugador local
-|       +-- PlayerLocalController      # Input WASD/flechas y clamp de posicion en arena
-|       +-- PlayerManager              # Instancia los prefabs de jugador segun ID
-|       +-- PlayerMovementInterpolator # SmoothDamp para suavizar el movimiento remoto
-|       +-- PlayerSpawner              # Utilidad de spawn por ID con soporte a PlayerTag
-|       +-- PlayerSyncController       # Controlador alternativo de sync (no activo en main)
-|       +-- PlayerTag                  # Componente de identificacion de jugador por ID
+|       +-- IPlayerSyncService         
+|       +-- DefaultPlayerSyncService   
+|       +-- PlayerLabel                
+|       +-- PlayerLocalController     
+|       +-- PlayerManager            
+|       +-- PlayerMovementInterpolator 
+|       +-- PlayerSpawner              
+|       +-- PlayerSyncController     
+|       +-- PlayerTag                
 |
 +-- Matchmaking/
-|   +-- FileLock                   # Libera el lock de archivo al cerrar la aplicacion
-|   +-- Matchmaking                # Logica de busqueda de partida y senal de inicio
-|   +-- PlayerIdAssigner           # Asigna Player 0 o Player 1 mediante file locks del SO
+|   +-- FileLock                  
+|   +-- Matchmaking                
+|   +-- PlayerIdAssigner          
 |
 +-- Networking/
-|   +-- ApiClient                  # Corutinas HTTP: GET y POST con UnityWebRequest
-|   +-- HttpNetworkService         # Adaptador INetworkService hacia ApiClient
-|   +-- INetworkService            # Interfaz de red (Send / Receive)
-|   +-- ServerData                 # DTO serializable: posX, posY, posZ
+|   +-- ApiClient                  
+|   +-- HttpNetworkService        
+|   +-- INetworkService            
+|   +-- ServerData                
 |
 +-- Systems/
-|   +-- SceneLoader                # Carga la escena Game por nombre
-|   +-- ScoreUI                    # Marcador BLUE vs RED con TextMeshPro
-|   +-- SpawnManager               # Devuelve la posicion de spawn segun ID del jugador
-|   +-- UnityMainThreadDispatcher  # Cola thread-safe de acciones para el hilo principal
+|   +-- SceneLoader               
+|   +-- ScoreUI                   
+|   +-- SpawnManager               
+|   +-- UnityMainThreadDispatcher  
 |
 +-- UI/
-    +-- ExitButtonUI               # Limpia el matchmaking y vuelve al menu principal
-    +-- GameEndUIController        # Muestra WINNER/LOSER y congela Time.timeScale
-    +-- GameStartCountdown         # Cuenta regresiva y habilitacion del input local
+    +-- ExitButtonUI               
+    +-- GameEndUIController       
+    +-- GameStartCountdown         
 ```
 
-### Patrones de diseno aplicados
+### Patrones de diseño aplicados
 
 **Inyeccion de dependencias.** `GameBootstrap` instancia `HttpNetworkService`, `DefaultGameStateService` y `DefaultPlayerSyncService`, y los pasa a `GameManagerHTTP.Init()`. El manager no conoce la implementacion concreta que recibe.
 
@@ -267,12 +263,8 @@ Scripts/
 | Problema | Descripcion |
 |---|---|
 | **Servidor local unico** | El servidor debe estar en `localhost:5005`. Para jugar en red real se debe cambiar `baseUrl` en `ApiClient` antes de compilar. |
-| **Sin deteccion de desconexion** | Si un jugador cierra el juego a mitad de partida, el oponente no recibe notificacion. La partida queda congelada para quien sigue en linea. |
 | **Matchmaking en misma maquina** | `PlayerIdAssigner` usa file locks del sistema operativo para distinguir instancias. Funciona correctamente solo cuando ambas instancias corren en el mismo equipo. |
 | **Sin reconexion** | No hay logica de reintento si un cliente pierde conexion en mitad de partida. |
-| **Sincronizacion de orbs por eventos** | El estado de los orbs se deduce a partir de los eventos en `posZ`. Si un cliente se reinicia, puede mostrar orbs que ya fueron recolectados. |
-| **gameId fijo** | El identificador de partida esta hardcodeado como `"game1"`. No es posible tener sesiones paralelas entre pares distintos de jugadores en el mismo servidor. |
-| **Dos jugadores exactos** | El sistema no contempla menos ni mas de 2 jugadores. No hay soporte para espectadores ni reconexion de un tercer cliente. |
 | **Carga de red fija** | Con dos clientes activos el servidor recibe ~100 peticiones por segundo. En redes con latencia alta el suavizado compensa parcialmente, pero pueden aparecer desfases visibles. |
 
 <p align="right"><a href="#readme-top">Volver al inicio</a></p>
