@@ -92,19 +92,25 @@ public class GameManagerHTTP : MonoBehaviour
 
         if (playerId == 0)
         {
-            statusText.text = "BLUE TEAM";
-            statusText.color = Color.blue;
+            statusText.text      = "BLUE TEAM";
+            statusText.color     = new Color(0x30 / 255f, 0x90 / 255f, 0xe0 / 255f);
 
             if (objectiveText != null)
-                objectiveText.text = "COLLECT 10 ORBS BEFORE THE RED TEAM";
+            {
+                objectiveText.text  = "COLLECT 10 COWS BEFORE THE RED TEAM";
+                objectiveText.color = new Color(0x30 / 255f, 0x90 / 255f, 0xe0 / 255f);
+            }
         }
         else
         {
-            statusText.text = "RED TEAM";
-            statusText.color = Color.red;
+            statusText.text      = "RED TEAM";
+            statusText.color     = new Color(0xd8 / 255f, 0x30 / 255f, 0x30 / 255f);
 
             if (objectiveText != null)
-                objectiveText.text = "COLLECT 10 ORBS BEFORE THE BLUE TEAM";
+            {
+                objectiveText.text  = "COLLECT 10 COWS BEFORE THE BLUE TEAM";
+                objectiveText.color = new Color(0xd8 / 255f, 0x30 / 255f, 0x30 / 255f);
+            }
         }
     }
 

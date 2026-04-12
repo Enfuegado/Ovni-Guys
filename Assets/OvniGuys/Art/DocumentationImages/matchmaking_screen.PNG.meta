@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aac91babc12228e4fb7db6c5e6890280
+guid: c7f23a7529b32f543a593b8744031f5f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4473841763632299001
-    second: Arena_0
+      213: 4405686809518553399
+    second: matchmaking_screen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arena_0
+      name: matchmaking_screen_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1278
-        height: 720
+        width: 1280
+        height: 722
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 704c3619e98b9e1c0800000000000000
-      internalID: -4473841763632299001
+      spriteID: 7393af89fc4242d30800000000000000
+      internalID: 4405686809518553399
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Arena_0: -4473841763632299001
+      matchmaking_screen_0: 4405686809518553399
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

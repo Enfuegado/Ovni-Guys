@@ -28,6 +28,6 @@ public class ScoreUI : MonoBehaviour
     void UpdateText()
     {
         scoreText.text =
-            $"<color=blue>BLUE {blueScore}</color> <color=white>|</color> <color=red>{redScore} RED</color>";
+            $"<color=#3090e0>BLUE {blueScore}</color> <color=white>|</color> <color=#d83030>{redScore} RED</color>";
     }
 }
