@@ -15,6 +15,7 @@ UserSettings/
 *.userprefs
 *.pidb
 *.booproj
+*.slnx
 
 .DS_Store
 .vscode/

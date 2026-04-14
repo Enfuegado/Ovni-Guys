@@ -4,13 +4,9 @@ public class OrbCollector : MonoBehaviour
 {
     public int score = 0;
     public int winScore = 10;
-    public float collectRadius = 0.6f;
 
     private GameManagerHTTP gameManager;
-    private GameObject localPlayer;
-
     private bool hasWon = false;
-
     private ScoreUI scoreUI;
 
     void Start()
@@ -19,33 +15,13 @@ public class OrbCollector : MonoBehaviour
         scoreUI = FindFirstObjectByType<ScoreUI>();
     }
 
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (gameManager == null) return;
+        if (hasWon) return;
 
-        if (localPlayer == null)
+        if (other.CompareTag("Orb"))
         {
-            localPlayer = gameManager.GetLocalPlayer();
-            if (localPlayer == null) return;
-        }
-
-        if (!hasWon)
-            CheckLocalCollection();
-    }
-
-    void CheckLocalCollection()
-    {
-        GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
-
-        foreach (GameObject orb in orbs)
-        {
-            float dist = Vector2.Distance(localPlayer.transform.position, orb.transform.position);
-
-            if (dist < collectRadius)
-            {
-                CollectOrb(orb);
-                break;
-            }
+            CollectOrb(other.gameObject);
         }
     }
 
