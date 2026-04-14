@@ -83,7 +83,7 @@ Una vez que ambos jugadores estan conectados, `Player 0` envia la senal de inici
 
 | Accion | Control |
 |---|---|
-| Mover el OVNI | `W A S D` / Flechas del teclado |
+| Mover el OVNI | `W A S D`|
 
 ---
 
