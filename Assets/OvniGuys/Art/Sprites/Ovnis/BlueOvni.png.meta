@@ -3,29 +3,53 @@ guid: 139f3d41eeba0fb42bb4eba6eda9abc6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -855298285791758126
-    second: 1_0
+      213: 4929623415976399067
+    second: BlueOvni_0
   - first:
-      213: 9180251791023625898
-    second: 1_1
+      213: 2503793806772094963
+    second: BlueOvni_1
   - first:
-      213: -549789443665989942
-    second: 1_2
+      213: -7516023468183173847
+    second: BlueOvni_2
   - first:
-      213: -5167413608083449488
-    second: 1_3
+      213: -4242186924239754054
+    second: BlueOvni_3
   - first:
-      213: -8408763834710030297
-    second: 1_4
+      213: 2818802265049203476
+    second: BlueOvni_4
   - first:
-      213: 1144234645273286238
-    second: 1_5
+      213: 1513555890133524317
+    second: BlueOvni_5
   - first:
-      213: 4141612904334516676
-    second: 1_6
+      213: 7759570601504894136
+    second: BlueOvni_6
   - first:
-      213: -5589664403440696418
-    second: 1_7
+      213: -8213292987655037213
+    second: BlueOvni_7
+  - first:
+      213: 5330785536805981026
+    second: BlueOvni_8
+  - first:
+      213: -2292232011654446258
+    second: BlueOvni_9
+  - first:
+      213: -7263949530015036075
+    second: BlueOvni_10
+  - first:
+      213: -1929275455597462861
+    second: BlueOvni_11
+  - first:
+      213: 5901085277014257338
+    second: BlueOvni_12
+  - first:
+      213: -230690728384014775
+    second: BlueOvni_13
+  - first:
+      213: -1079886086579033204
+    second: BlueOvni_14
+  - first:
+      213: -8928584248914361898
+    second: BlueOvni_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -121,177 +145,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1_0
+      name: BlueOvni_0
       rect:
         serializedVersion: 2
         x: 35
-        y: 100
-        width: 187
-        height: 153
+        y: 677
+        width: 244
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d8b16a9dbe5124f0800000000000000
-      internalID: -855298285791758126
+      spriteID: bd098b9e06a896440800000000000000
+      internalID: 4929623415976399067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_1
+      name: BlueOvni_1
       rect:
         serializedVersion: 2
-        x: 274
-        y: 99
-        width: 185
-        height: 156
+        x: 319
+        y: 677
+        width: 245
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa65b986d5ec66f70800000000000000
-      internalID: 9180251791023625898
+      spriteID: 3f7497b93334fb220800000000000000
+      internalID: 2503793806772094963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_2
+      name: BlueOvni_2
       rect:
         serializedVersion: 2
-        x: 512
-        y: 100
-        width: 182
-        height: 154
+        x: 604
+        y: 677
+        width: 248
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ace6705f961ce58f0800000000000000
-      internalID: -549789443665989942
+      spriteID: 925417f2a78b1b790800000000000000
+      internalID: -7516023468183173847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_3
+      name: BlueOvni_3
       rect:
         serializedVersion: 2
-        x: 749
-        y: 102
-        width: 183
-        height: 151
+        x: 889
+        y: 677
+        width: 246
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0799aaa93b8a948b0800000000000000
-      internalID: -5167413608083449488
+      spriteID: abce1ede779b025c0800000000000000
+      internalID: -4242186924239754054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_4
+      name: BlueOvni_4
       rect:
         serializedVersion: 2
-        x: 985
-        y: 104
-        width: 185
-        height: 148
+        x: 35
+        y: 459
+        width: 246
+        height: 205
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72805f708d11e4b80800000000000000
-      internalID: -8408763834710030297
+      spriteID: 4130354b9b56e1720800000000000000
+      internalID: 2818802265049203476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_5
+      name: BlueOvni_5
       rect:
         serializedVersion: 2
-        x: 1221
-        y: 104
-        width: 189
-        height: 146
+        x: 318
+        y: 458
+        width: 249
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e569533f85321ef00800000000000000
-      internalID: 1144234645273286238
+      spriteID: d5fdb1b101b310510800000000000000
+      internalID: 1513555890133524317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_6
+      name: BlueOvni_6
       rect:
         serializedVersion: 2
-        x: 1458
-        y: 102
-        width: 191
-        height: 149
+        x: 603
+        y: 458
+        width: 249
+        height: 206
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c168084ef6f97930800000000000000
-      internalID: 4141612904334516676
+      spriteID: 8bc6340a9588fab60800000000000000
+      internalID: 7759570601504894136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1_7
+      name: BlueOvni_7
       rect:
         serializedVersion: 2
-        x: 1695
-        y: 101
-        width: 192
-        height: 152
+        x: 887
+        y: 459
+        width: 250
+        height: 205
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e93854327d58d62b0800000000000000
-      internalID: -5589664403440696418
+      spriteID: 3ee5d9a2b85840e80800000000000000
+      internalID: -8213292987655037213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 239
+        width: 246
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26b4c17b331caf940800000000000000
+      internalID: 5330785536805981026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_9
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 240
+        width: 248
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43ce82512b5030e0800000000000000
+      internalID: -2292232011654446258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_10
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 240
+        width: 252
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55d86157364413b90800000000000000
+      internalID: -7263949530015036075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_11
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 239
+        width: 249
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3babb33e136d935e0800000000000000
+      internalID: -1929275455597462861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 17
+        width: 248
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abee8bd4bcdd4e150800000000000000
+      internalID: 5901085277014257338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_13
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 17
+        width: 247
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 946d1b9310c6cccf0800000000000000
+      internalID: -230690728384014775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_14
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 17
+        width: 247
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8be19363597301f0800000000000000
+      internalID: -1079886086579033204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueOvni_15
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 17
+        width: 247
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d1cf486eeb471480800000000000000
+      internalID: -8928584248914361898
       vertices: []
       indices: 
       edges: []
@@ -300,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: df8d66ed5cfb5cd428e65d4be0ed8be8
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -310,14 +510,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1_0: -855298285791758126
-      1_1: 9180251791023625898
-      1_2: -549789443665989942
-      1_3: -5167413608083449488
-      1_4: -8408763834710030297
-      1_5: 1144234645273286238
-      1_6: 4141612904334516676
-      1_7: -5589664403440696418
+      BlueOvni_0: 4929623415976399067
+      BlueOvni_1: 2503793806772094963
+      BlueOvni_10: -7263949530015036075
+      BlueOvni_11: -1929275455597462861
+      BlueOvni_12: 5901085277014257338
+      BlueOvni_13: -230690728384014775
+      BlueOvni_14: -1079886086579033204
+      BlueOvni_15: -8928584248914361898
+      BlueOvni_2: -7516023468183173847
+      BlueOvni_3: -4242186924239754054
+      BlueOvni_4: 2818802265049203476
+      BlueOvni_5: 1513555890133524317
+      BlueOvni_6: 7759570601504894136
+      BlueOvni_7: -8213292987655037213
+      BlueOvni_8: 5330785536805981026
+      BlueOvni_9: -2292232011654446258
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

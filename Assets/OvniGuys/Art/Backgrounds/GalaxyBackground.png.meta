@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f3c5b7fd5dad5924da7c70ffd496b6fd
+guid: a3b63666e5039d7419736f935c7823e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 451948545911742582
-    second: BackgroundPop-upError_0
+      213: -8182112195075444079
+    second: GalaxyBackground_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackgroundPop-upError_0
+      name: GalaxyBackground_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 19
-        width: 1197
-        height: 683
+        x: 0
+        y: 0
+        width: 1280
+        height: 720
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 670e2d7dec4a54600800000000000000
-      internalID: 451948545911742582
+      spriteID: 192f22c2f4c437e80800000000000000
+      internalID: -8182112195075444079
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BackgroundPop-upError_0: 451948545911742582
+      GalaxyBackground_0: -8182112195075444079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

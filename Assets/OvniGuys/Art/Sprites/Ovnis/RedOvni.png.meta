@@ -3,29 +3,53 @@ guid: f6bf18e29ccf9e449bf6495c66288eaf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6937817954938267909
-    second: 2_0
+      213: -8898817749249810484
+    second: RedOvni_0
   - first:
-      213: 3191122964850554743
-    second: 2_1
+      213: 3966811936688942328
+    second: RedOvni_1
   - first:
-      213: 5382512944479897801
-    second: 2_2
+      213: -7896065807374131458
+    second: RedOvni_2
   - first:
-      213: -5515383189529662604
-    second: 2_3
+      213: 1304046578995225328
+    second: RedOvni_3
   - first:
-      213: -3926759211464601419
-    second: 2_4
+      213: -3831893777524751003
+    second: RedOvni_4
   - first:
-      213: -4424780041397978121
-    second: 2_5
+      213: -4168287125902603087
+    second: RedOvni_5
   - first:
-      213: 8817454751965551104
-    second: 2_6
+      213: 5504966995497074705
+    second: RedOvni_6
   - first:
-      213: 3974921216390489406
-    second: 2_7
+      213: -5036101342286164888
+    second: RedOvni_7
+  - first:
+      213: 8423581229235947050
+    second: RedOvni_8
+  - first:
+      213: -7719451083691843099
+    second: RedOvni_9
+  - first:
+      213: 7467995548859308559
+    second: RedOvni_10
+  - first:
+      213: -3841743603428165976
+    second: RedOvni_11
+  - first:
+      213: -5842020347286164268
+    second: RedOvni_12
+  - first:
+      213: -6479105175178639917
+    second: RedOvni_13
+  - first:
+      213: 7951501397860843192
+    second: RedOvni_14
+  - first:
+      213: 7819015774737427169
+    second: RedOvni_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -121,13 +145,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2_0
+      name: RedOvni_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 99
-        width: 189
-        height: 156
+        x: 35
+        y: 677
+        width: 244
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5092c600ca4184060800000000000000
-      internalID: 6937817954938267909
+      spriteID: ccf160fa76c018480800000000000000
+      internalID: -8898817749249810484
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_1
+      name: RedOvni_1
       rect:
         serializedVersion: 2
-        x: 274
-        y: 99
-        width: 185
-        height: 156
+        x: 319
+        y: 677
+        width: 245
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7773282ed65294c20800000000000000
-      internalID: 3191122964850554743
+      spriteID: 8fcaf197072fc0730800000000000000
+      internalID: 3966811936688942328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_2
+      name: RedOvni_2
       rect:
         serializedVersion: 2
-        x: 512
-        y: 100
-        width: 182
-        height: 154
+        x: 604
+        y: 677
+        width: 248
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +204,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c88aa6510782ba40800000000000000
-      internalID: 5382512944479897801
+      spriteID: efe5b5cbbf98b6290800000000000000
+      internalID: -7896065807374131458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_3
+      name: RedOvni_3
       rect:
         serializedVersion: 2
-        x: 749
-        y: 102
-        width: 183
-        height: 151
+        x: 889
+        y: 677
+        width: 246
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 47b6cebf53c6573b0800000000000000
-      internalID: -5515383189529662604
+      spriteID: 0f2e2975477e81210800000000000000
+      internalID: 1304046578995225328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_4
+      name: RedOvni_4
       rect:
         serializedVersion: 2
-        x: 985
-        y: 104
-        width: 185
-        height: 148
+        x: 35
+        y: 459
+        width: 246
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b0d8225d495189c0800000000000000
-      internalID: -3926759211464601419
+      spriteID: 5658b9d59e062dac0800000000000000
+      internalID: -3831893777524751003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_5
+      name: RedOvni_5
       rect:
         serializedVersion: 2
-        x: 1221
-        y: 104
-        width: 189
-        height: 146
+        x: 318
+        y: 458
+        width: 249
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,20 +270,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7fb3c3feef50892c0800000000000000
-      internalID: -4424780041397978121
+      spriteID: 1bccdba81f44726c0800000000000000
+      internalID: -4168287125902603087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_6
+      name: RedOvni_6
       rect:
         serializedVersion: 2
-        x: 1458
-        y: 102
-        width: 191
-        height: 149
+        x: 603
+        y: 458
+        width: 249
+        height: 206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00a9cf94164ed5a70800000000000000
-      internalID: 8817454751965551104
+      spriteID: 1104adad052956c40800000000000000
+      internalID: 5504966995497074705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2_7
+      name: RedOvni_7
       rect:
         serializedVersion: 2
-        x: 1695
-        y: 101
-        width: 192
-        height: 152
+        x: 887
+        y: 459
+        width: 250
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,8 +314,184 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e356e1949c1c92730800000000000000
-      internalID: 3974921216390489406
+      spriteID: 86c4a28f28c2c1ab0800000000000000
+      internalID: -5036101342286164888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 239
+        width: 246
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26c1497f7296e470800000000000000
+      internalID: 8423581229235947050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_9
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 240
+        width: 248
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e12b8783200fd490800000000000000
+      internalID: -7719451083691843099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_10
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 240
+        width: 252
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0a15f17266a3a760800000000000000
+      internalID: 7467995548859308559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_11
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 239
+        width: 249
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a6f88f0c826faac0800000000000000
+      internalID: -3841743603428165976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 17
+        width: 248
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dc676d4279fceea0800000000000000
+      internalID: -5842020347286164268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_13
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 17
+        width: 247
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d50513cb289516a0800000000000000
+      internalID: -6479105175178639917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_14
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 17
+        width: 247
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8be748a7468695e60800000000000000
+      internalID: 7951501397860843192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedOvni_15
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 17
+        width: 247
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ea66629b69b28c60800000000000000
+      internalID: 7819015774737427169
       vertices: []
       indices: 
       edges: []
@@ -310,14 +510,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      2_0: 6937817954938267909
-      2_1: 3191122964850554743
-      2_2: 5382512944479897801
-      2_3: -5515383189529662604
-      2_4: -3926759211464601419
-      2_5: -4424780041397978121
-      2_6: 8817454751965551104
-      2_7: 3974921216390489406
+      RedOvni_0: -8898817749249810484
+      RedOvni_1: 3966811936688942328
+      RedOvni_10: 7467995548859308559
+      RedOvni_11: -3841743603428165976
+      RedOvni_12: -5842020347286164268
+      RedOvni_13: -6479105175178639917
+      RedOvni_14: 7951501397860843192
+      RedOvni_15: 7819015774737427169
+      RedOvni_2: -7896065807374131458
+      RedOvni_3: 1304046578995225328
+      RedOvni_4: -3831893777524751003
+      RedOvni_5: -4168287125902603087
+      RedOvni_6: 5504966995497074705
+      RedOvni_7: -5036101342286164888
+      RedOvni_8: 8423581229235947050
+      RedOvni_9: -7719451083691843099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

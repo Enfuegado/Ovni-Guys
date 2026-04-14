@@ -351,8 +351,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 3635a18a9c2da4d418e360ad6be91db8, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: acec296f60f8eae4ea3bcb28f685d75f, type: 3}
+    m_HighlightedSprite: {fileID: 4419752865986581807, guid: acec296f60f8eae4ea3bcb28f685d75f, type: 3}
+    m_PressedSprite: {fileID: -2527275254937737988, guid: 3635a18a9c2da4d418e360ad6be91db8, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64d713905eca57f4c8b9506dc0e0b308, type: 3}
+  m_Sprite: {fileID: -1663779157145004948, guid: 64d713905eca57f4c8b9506dc0e0b308, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1000,7 +1000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -82, y: 266}
+  m_AnchoredPosition: {x: -82, y: 274}
   m_SizeDelta: {x: 575.6, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809280759
@@ -1327,7 +1327,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12.78, y: 7.2}
+  m_Size: {x: 12.76, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1600,7 +1600,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -477114279786653777, guid: e9a86da4769dbe74e839de33339abf7d, type: 3}
+  m_Sprite: {fileID: -8182112195075444079, guid: a3b63666e5039d7419736f935c7823e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f3c5b7fd5dad5924da7c70ffd496b6fd, type: 3}
+  m_Sprite: {fileID: 451948545911742582, guid: f3c5b7fd5dad5924da7c70ffd496b6fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2228,8 +2228,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279112974
+  m_fontColor: {r: 0.05490196, g: 0.08235294, b: 0.05490196, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
