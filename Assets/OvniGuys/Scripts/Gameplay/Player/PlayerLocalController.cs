@@ -4,8 +4,8 @@ public class PlayerLocalController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
 
-    public float width = 24f;
-    public float height = 12f;
+    public float width = 22f;
+    public float height = 10f;
 
     void Update()
     {

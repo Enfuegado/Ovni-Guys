@@ -90,28 +90,28 @@ public class GameManagerHTTP : MonoBehaviour
     {
         if (statusText == null) return;
 
-        if (playerId == 0)
-        {
-            statusText.text      = "BLUE TEAM";
-            statusText.color     = new Color(0x30 / 255f, 0x90 / 255f, 0xe0 / 255f);
+    if (playerId == 0)
+    {
+        statusText.text = "<color=#3090E0>BLUE TEAM</color>";
+        statusText.color = Color.white;
 
-            if (objectiveText != null)
-            {
-                objectiveText.text  = "COLLECT 10 COWS BEFORE THE RED TEAM";
-                objectiveText.color = new Color(0x30 / 255f, 0x90 / 255f, 0xe0 / 255f);
-            }
-        }
-        else
+        if (objectiveText != null)
         {
-            statusText.text      = "RED TEAM";
-            statusText.color     = new Color(0xd8 / 255f, 0x30 / 255f, 0x30 / 255f);
-
-            if (objectiveText != null)
-            {
-                objectiveText.text  = "COLLECT 10 COWS BEFORE THE BLUE TEAM";
-                objectiveText.color = new Color(0xd8 / 255f, 0x30 / 255f, 0x30 / 255f);
-            }
+            objectiveText.text = "COLLECT 10 COWS BEFORE THE <color=#E03030>RED TEAM</color>";
+            objectiveText.color = Color.white;
         }
+    }
+    else
+    {
+        statusText.text = "<color=#E03030>RED TEAM</color>";
+        statusText.color = Color.white;
+
+        if (objectiveText != null)
+        {
+            objectiveText.text = "COLLECT 10 COWS BEFORE THE <color=#3090E0>BLUE TEAM</color>";
+            objectiveText.color = Color.white;
+        }
+    }
     }
 
     public GameObject GetLocalPlayer()

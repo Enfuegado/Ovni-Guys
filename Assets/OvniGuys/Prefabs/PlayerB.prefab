@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9118918784925553109}
   - component: {fileID: 8047524579419816792}
+  - component: {fileID: 7213551199646713566}
   - component: {fileID: 2155905341002951068}
-  - component: {fileID: 8676389698801820730}
+  - component: {fileID: 982827431961695209}
   m_Layer: 0
   m_Name: PlayerB
   m_TagString: Untagged
@@ -62,21 +63,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2155905341002951068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3151234818025903415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792cb25ea1f1dc34ca5a76e784a82f34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerId: 0
---- !u!61 &8676389698801820730
-BoxCollider2D:
+--- !u!58 &7213551199646713566
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,18 +97,35 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018712878, y: -0.011855245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2.5641658, y: 2.2228367}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1
+--- !u!114 &2155905341002951068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151234818025903415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792cb25ea1f1dc34ca5a76e784a82f34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerId: 0
+--- !u!114 &982827431961695209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151234818025903415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9504a2e8486336448892ad793a3d0e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbCollector
+  score: 0
+  winScore: 10
 --- !u!1 &3206657034648358259
 GameObject:
   m_ObjectHideFlags: 0

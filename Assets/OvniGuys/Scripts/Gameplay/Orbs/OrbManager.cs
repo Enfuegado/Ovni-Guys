@@ -9,11 +9,17 @@ public class OrbManager : MonoBehaviour
     public int totalOrbs = 30;
     public float spawnDuration = 20f;
 
-    public float width = 24f;
-    public float height = 12f;
+    public float width = 20f;
+    public float height = 10f;
 
-    public float minDistance = 1.5f;
-    public int maxAttemptsPerOrb = 50;
+    public float minDistance = 1.2f;
+    public int maxAttemptsPerOrb = 100;
+
+    public float margin = 1.5f;
+    public float playerSafeRadius = 2.5f;
+
+    private Vector2 player1Pos = new Vector2(-3f, 0f);
+    private Vector2 player2Pos = new Vector2(3f, 0f);
 
     private List<Vector2> positions = new List<Vector2>();
     private List<GameObject> orbs = new List<GameObject>();
@@ -27,10 +33,12 @@ public class OrbManager : MonoBehaviour
 
     void GeneratePositions()
     {
-        Random.InitState(12345);
+        Random.InitState(54321); // 🔥 cambia este número si no te gusta el resultado
 
         float halfW = width * 0.5f;
         float halfH = height * 0.5f;
+
+        Vector2 center = transform.position;
 
         positions.Clear();
 
@@ -40,12 +48,12 @@ public class OrbManager : MonoBehaviour
 
             for (int attempt = 0; attempt < maxAttemptsPerOrb; attempt++)
             {
-                float x = Random.Range(-halfW, halfW);
-                float y = Random.Range(-halfH, halfH);
+                float x = Random.Range(center.x - halfW + margin, center.x + halfW - margin);
+                float y = Random.Range(center.y - halfH + margin, center.y + halfH - margin);
 
                 Vector2 candidate = new Vector2(x, y);
 
-                if (IsFarEnough(candidate))
+                if (IsFarEnough(candidate) && IsFarFromPlayers(candidate))
                 {
                     positions.Add(candidate);
                     placed = true;
@@ -55,7 +63,12 @@ public class OrbManager : MonoBehaviour
 
             if (!placed)
             {
-                positions.Add(Vector2.zero);
+                Vector2 fallback = new Vector2(
+                    Random.Range(center.x - halfW + margin, center.x + halfW - margin),
+                    Random.Range(center.y - halfH + margin, center.y + halfH - margin)
+                );
+
+                positions.Add(fallback);
             }
         }
     }
@@ -67,6 +80,13 @@ public class OrbManager : MonoBehaviour
             if (Vector2.Distance(p, pos) < minDistance)
                 return false;
         }
+        return true;
+    }
+
+    bool IsFarFromPlayers(Vector2 pos)
+    {
+        if (Vector2.Distance(pos, player1Pos) < playerSafeRadius) return false;
+        if (Vector2.Distance(pos, player2Pos) < playerSafeRadius) return false;
         return true;
     }
 
