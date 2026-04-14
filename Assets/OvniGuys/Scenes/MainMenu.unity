@@ -991,7 +991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4634077543631292144, guid: 1f5f1ad672dbd324cb6710773205ebe5, type: 3}
+  m_Sprite: {fileID: -4559203394322302271, guid: 1f5f1ad672dbd324cb6710773205ebe5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1159,7 +1159,7 @@ GameObject:
   - component: {fileID: 2003142955}
   - component: {fileID: 2003142954}
   m_Layer: 5
-  m_Name: BtnJoin
+  m_Name: BtnFind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,8 +1213,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 4130640169021434097, guid: b50bf7031cb4dd940affbec834ebe87c, type: 3}
-    m_PressedSprite: {fileID: 3465286685962602723, guid: 794a99d400e25a04c9d87aef43ec2443, type: 3}
+    m_HighlightedSprite: {fileID: 2847078141201184364, guid: 464910fab9b2d4f4da28f7549fa8a8dd, type: 3}
+    m_PressedSprite: {fileID: -238354426491895990, guid: 20269da54bd1dfc41a42cca7c82aed2b, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4178046375966092550, guid: a09bee1243740a24abc7c56a6e8a44f7, type: 3}
+  m_Sprite: {fileID: -8215676813099931599, guid: d8223cbe60617ca45afb62f023b9157a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
